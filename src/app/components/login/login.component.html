@@ -1,0 +1,10 @@
+<div class="container">
+  <form class="login-form" role="form" (submit)="login()" name="form">
+    <input class="form-control" placeholder="Email" type="text" [(ngModel)]="credentials.email">
+    <input class="form-control" placeholder="Password" type="password" [(ngModel)]="credentials.password">
+
+    <button class="btn btn-primary btn-block" type="submit">Login</button>
+  </form>
+</div>
+
+

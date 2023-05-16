@@ -9,7 +9,7 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
+      <a class="navbar-brand" href="javascript:void(0)" (click)="navigateHome()">{{getTitle()}}</a>
     </div>
     <button class="navbar-toggler" type="button" (click)="collapse()"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
@@ -54,6 +54,14 @@
         <li class="nav-item">
           <a class="nav-link btn-rotate" href="javascript:void(0)">
             <i class="nc-icon nc-settings-gear-65"></i>
+            <p>
+              <span class="d-lg-none d-md-block">Account</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-rotate" href="javascript:void(0)" (click)="goToProfile()">
+            <i class="nc-icon nc-single-02"></i>
             <p>
               <span class="d-lg-none d-md-block">Account</span>
             </p>
