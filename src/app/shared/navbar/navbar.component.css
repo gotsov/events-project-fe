@@ -1,0 +1,26 @@
+.flat-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #429e9e;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.flat-button:visited {
+  color: #333333;
+}
+
+.flat-button:hover {
+  background-color: #7ec2c2;
+}
+
+.flat-button:active {
+  background-color: #dcdcdc;
+}

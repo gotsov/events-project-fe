@@ -150,10 +150,6 @@
   },
   "defaultProject": "pd-free-angularcli",
   "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "scss"
-    },
     "@schematics/angular:directive": {
       "prefix": "app"
     }

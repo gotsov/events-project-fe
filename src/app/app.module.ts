@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {LoginService} from "./services/login.service";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppComponent,
     AdminLayoutComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserAnimationsModule,

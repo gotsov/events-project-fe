@@ -1,0 +1,18 @@
+<div class="container">
+  <form class="register-form" role="form" (ngSubmit)="registerUser()">
+    <input class="form-control" type="text" placeholder="Име" [(ngModel)]="this.user.firstName" required>
+    <input class="form-control" type="text" placeholder="Фамилия" [(ngModel)]="this.user.lastName" required>
+    <input class="form-control" type="email" placeholder="Имейл" [(ngModel)]="this.user.email" required>
+    <input class="form-control" type="tel" placeholder="Тел. номер" [(ngModel)]="this.user.phoneNumber">
+    <input class="form-control" type="password" placeholder="Парола" [(ngModel)]="this.user.password" required>
+    <input class="form-control" type="password" placeholder="Повтори парола"  [(ngModel)]="confirmPassword" required>
+
+    <div >
+      <input type="checkbox" id="isOrganizer" name="isOrganizer" [(ngModel)]="isOrganizer" required>
+      <label for="isOrganizer">Искам права на организатор</label>
+    </div>
+
+    <button  class="btn btn-primary btn-block" type="submit">Регистрация</button>
+  </form>
+</div>
+

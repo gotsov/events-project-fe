@@ -2,11 +2,16 @@ import {Component, OnInit, Renderer2, ViewChild, ElementRef} from '@angular/core
 import {ROUTES} from '../../sidebar/sidebar.component';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {User} from "../../models/User";
+import {LoginService} from "../../services/login.service";
+import {UserInfo} from "../../models/UserInfo";
+import {Subscription} from "rxjs";
 
 @Component({
   moduleId: module.id,
   selector: 'navbar-cmp',
-  templateUrl: 'navbar.component.html'
+  templateUrl: 'navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit {
@@ -16,10 +21,25 @@ export class NavbarComponent implements OnInit {
   private toggleButton;
   private sidebarVisible: boolean;
 
+  private loggedInSubscription;
+
+  loggedUser: UserInfo = {
+    firstName: '',
+    lastName: '',
+    email: '',
+  };
+
+  isUserLogged: boolean;
+
+
   public isCollapsed = true;
   @ViewChild("navbar-cmp", {static: false}) button;
 
-  constructor(location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router) {
+  constructor(location: Location,
+              private renderer: Renderer2,
+              private element: ElementRef,
+              private router: Router,
+              private loginService: LoginService) {
     this.location = location;
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -105,4 +125,17 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  refreshNavigation(): void {
+    this.loginService.getCurrentLoggedUser().subscribe({
+      next: (user: UserInfo) => {
+        console.log("nanvavnnvan")
+        this.loggedUser = user;
+        this.isUserLogged = true;
+      }
+    })
+  }
+
+  getTitLoggedUserNames(): string {
+    return "Димитър Гоцов";
+  }
 }
