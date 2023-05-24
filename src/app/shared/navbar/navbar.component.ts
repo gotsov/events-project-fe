@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
 
   isUserLogged: boolean;
 
-
   public isCollapsed = true;
   @ViewChild("navbar-cmp", {static: false}) button;
 
@@ -64,7 +63,7 @@ export class NavbarComponent implements OnInit {
         return this.listTitles[item].title;
       }
     }
-    return 'Events';
+    return 'Събития';
   }
 
   sidebarToggle() {

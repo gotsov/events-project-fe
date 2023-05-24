@@ -15,10 +15,12 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {HomeComponent} from "./components/home/home.component";
 import {LoginComponent} from "./components/login/login.component";
 import {FormsModule} from "@angular/forms";
-import {LoginService} from "./services/login.service";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './components/register/register.component';
+import { AllEventsComponent } from './components/all-events/all-events.component';
+import { EventComponent } from './components/event/event.component';
+import { DateTransformerPipe } from './pipes/date-transformer.pipe';
 
 
 @NgModule({
@@ -27,7 +29,10 @@ import { RegisterComponent } from './components/register/register.component';
     AdminLayoutComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AllEventsComponent,
+    EventComponent,
+    DateTransformerPipe
   ],
   imports: [
     BrowserAnimationsModule,

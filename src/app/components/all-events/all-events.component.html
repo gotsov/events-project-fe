@@ -1,0 +1,21 @@
+<form>
+  <div class="container">
+    <div class="input-group no-border">
+      <input type="text" value="" class="form-control" placeholder="Търси...">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <i class="nc-icon nc-zoom-split"></i>
+        </div>
+      </div>
+    </div>
+    <div id="test">
+      <button class="btn btn-primary btn-block" type="submit">Добави</button>
+    </div>
+  </div>
+</form>
+
+<div class="event-container">
+  <div *ngFor="let event of events">
+    <event [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"></event>
+  </div>
+</div>
