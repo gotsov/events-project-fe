@@ -19,6 +19,13 @@
     </div>
 
     <div>
+      <label for="venue">Място на събитието:</label>
+      <select id="venue" name="venue" [(ngModel)]="event.venue" (change)="onVenueChange($event)">
+        <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
+      </select>
+    </div>
+
+    <div>
       <label for="description">Описание:</label>
       <textarea id="description" name="description" [(ngModel)]="event.description" required></textarea>
     </div>
@@ -33,7 +40,7 @@
       </ul>
     </div>
 
-    <button class="btn btn-primary btn-block" type="submit" (click)="onSubmit(); close();">Добави събитие</button>
+    <button class="btn btn-primary btn-block" type="submit" (click)="onSubmit()">Добави събитие</button>
   </form>
 </div>
 

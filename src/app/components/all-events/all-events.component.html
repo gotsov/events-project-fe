@@ -20,5 +20,5 @@
   </div>
 </div>
 
-<add-event *ngIf="showModal" (closeModal)="hideModal()"></add-event>
+<add-event *ngIf="showModal" (closeModal)="hideModal()" (refresh)="onChildRefresh()"></add-event>
 

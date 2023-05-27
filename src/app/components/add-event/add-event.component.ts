@@ -7,17 +7,24 @@ import {EventService} from "../../services/event.service";
 import {response} from "express";
 import {FormatDatePipe} from "../../pipes/format-date.pipe";
 import {Time} from "@angular/common";
+import {VenueService} from "../../services/venue.service";
 
 @Component({
   selector: 'add-event',
   templateUrl: './add-event.component.html',
   styleUrls: ['./add-event.component.css']
 })
-export class AddEventComponent {
+export class AddEventComponent implements OnInit {
 
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
+  @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService,
+              private venueService: VenueService) {
+  }
+
+  ngOnInit(): void {
+    this.loadUserVenues();
   }
 
   event: Event = {
@@ -30,19 +37,35 @@ export class AddEventComponent {
   };
   tagInput: string;
 
-  startTime: Time;
+  venues: Venue[];
+  selectedVenue: string = '';
 
   close() {
     this.closeModal.emit();
   }
 
   onSubmit() {
-    console.log(this.event);
-    this.eventService.add(this.event).subscribe(
-      response => {
-        console.log('Event added successfully:', response);
+    for (let v of this.venues) {
+      if (this.selectedVenue === v.name) {
+        this.event.venue = v;
       }
-    );
+    }
+
+    this.eventService.add(this.event).subscribe({
+      next: response => {
+        console.log('Event added successfully:', response);
+      },
+      complete: () => {
+        console.log("in complete before refresh")
+        this.refreshParent();
+        this.close();
+      },
+      error: () => {
+        console.log("in error before refresh")
+        this.refreshParent();
+        this.close();
+      }
+      });
   }
 
   addTag(){
@@ -62,7 +85,19 @@ export class AddEventComponent {
     }
   }
 
-  // formatStartDate(date: Date) {
-  //   this.formattedStartDate = this.datePipe.transform(date, 'yyyy-MM-ddTHH:mm:ss');
-  // }
+  loadUserVenues() {
+    this.venueService.getAllVenuesCurrentUser().subscribe({
+      next: result => {
+        this.venues = result;
+      }
+    })
+  }
+
+  onVenueChange(event: any) {
+    this.selectedVenue = event.target.value;
+  }
+
+  refreshParent() {
+    this.refresh.emit();
+  }
 }

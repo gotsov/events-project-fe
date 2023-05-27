@@ -8,7 +8,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 4px;
-  max-width: 500px;
+  max-width: 600px;
   width: 90%;
   opacity: 1;
   visibility: visible;
@@ -90,6 +90,18 @@ li:hover {
 
 textarea {
   height: 100px;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+option {
+  padding: 5px;
 }
 
 #tags {

@@ -34,4 +34,10 @@ export class AllEventsComponent implements OnInit {
   hideModal() {
     this.showModal = false;
   }
+
+  onChildRefresh() {
+    console.log("in refresh in parent")
+    this.loadEvents();
+    console.log("after loadEvents in refresh in parent")
+  }
 }
