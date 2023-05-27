@@ -11,6 +11,8 @@ export class AllEventsComponent implements OnInit {
 
   events: Event[];
 
+  showModal: boolean = false;
+
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
@@ -23,5 +25,13 @@ export class AllEventsComponent implements OnInit {
         this.events = events;
       }
     });
+  }
+
+  showModalFunction() {
+    this.showModal = true;
+  }
+
+  hideModal() {
+    this.showModal = false;
   }
 }

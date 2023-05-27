@@ -21,6 +21,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { AllEventsComponent } from './components/all-events/all-events.component';
 import { EventComponent } from './components/event/event.component';
 import { DateTransformerPipe } from './pipes/date-transformer.pipe';
+import { AddEventComponent } from './components/add-event/add-event.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { FormatDatePipe } from './pipes/format-date.pipe';
 
 
 @NgModule({
@@ -32,7 +35,9 @@ import { DateTransformerPipe } from './pipes/date-transformer.pipe';
     RegisterComponent,
     AllEventsComponent,
     EventComponent,
-    DateTransformerPipe
+    DateTransformerPipe,
+    AddEventComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +51,8 @@ import { DateTransformerPipe } from './pipes/date-transformer.pipe';
     FixedPluginModule,
     FormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

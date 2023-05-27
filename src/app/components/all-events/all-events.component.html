@@ -9,7 +9,7 @@
       </div>
     </div>
     <div id="test">
-      <button class="btn btn-primary btn-block" type="submit">Добави</button>
+      <button class="btn btn-primary btn-block" type="submit" (click)="showModalFunction()">Добави</button>
     </div>
   </div>
 </form>
@@ -19,3 +19,6 @@
     <event [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"></event>
   </div>
 </div>
+
+<add-event *ngIf="showModal" (closeModal)="hideModal()"></add-event>
+

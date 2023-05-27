@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "../models/User";
 import {Observable} from "rxjs";
-import {UserInfo} from "../models/UserInfo";
 import {Event} from "../models/Event";
 
 @Injectable({
@@ -14,5 +12,12 @@ export class EventService {
 
   getAll(): Observable<Event[]> {
     return this.http.get('http://localhost:8080/api/events', {withCredentials: true}) as Observable<Event[]>;
+  }
+
+  add(event: Event): Observable<any> {
+    const requestBody = JSON.stringify(event);
+
+    console.log(requestBody);
+    return this.http.post('http://localhost:8080/api/events', requestBody, {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<any>;
   }
 }

@@ -1,4 +1,4 @@
-export interface Venue {
+export class Venue {
   name: string;
   city: string;
   address: string;

@@ -1,3 +1,3 @@
-export interface Tag {
+export class Tag {
   name: string;
 }

@@ -1,0 +1,40 @@
+<!--<div class="modal-overlay"></div>-->
+
+<div class="modal-container">
+  <label id="title">Добави ново събитие</label>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Име:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="event.name" required>
+    </div>
+
+    <div>
+      <label for="start-date">Начало:</label>
+      <input type="datetime-local" id="start-date" name="start-date" [(ngModel)]="event.startDate" required>
+    </div>
+
+    <div>
+      <label for="end-date">Край:</label>
+      <input type="datetime-local" id="end-date" name="end-date" [(ngModel)]="event.endDate" required>
+    </div>
+
+    <div>
+      <label for="description">Описание:</label>
+      <textarea id="description" name="description" [(ngModel)]="event.description" required></textarea>
+    </div>
+
+    <div>
+      <label for="tags">Тагове:</label>
+      <input type="text" id="tags" name="tags" [(ngModel)]="tagInput" (keydown.enter)="$event.preventDefault(); addTag()">
+      <button class="btn btn-primary" type="button" (click)="addTag()" id="tag-button">Добави таг</button>
+      <ul>
+        <li *ngFor="let tag of event.tags" (click)="removeTag(tag)">{{ tag.name }}
+        </li>
+      </ul>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" (click)="onSubmit(); close();">Добави събитие</button>
+  </form>
+</div>
+
+
