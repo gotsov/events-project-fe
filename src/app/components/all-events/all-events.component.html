@@ -20,5 +20,8 @@
   </div>
 </div>
 
-<add-event *ngIf="showModal" (closeModal)="hideModal()" (refresh)="onChildRefresh()"></add-event>
+<div class="modal-wrapper">
+  <add-event *ngIf="showModal" (closeModal)="hideModal()" (refresh)="onChildRefresh()" (openExtension)="openExtension()"></add-event>
+<!--  <add-event-extended *ngIf="isExtensionVisible" (addEventWithExtension)="addEventWithExtension($event)"></add-event-extended>-->
+</div>
 

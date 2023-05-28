@@ -24,6 +24,7 @@ import { DateTransformerPipe } from './pipes/date-transformer.pipe';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { FormatDatePipe } from './pipes/format-date.pipe';
+import { AddEventExtendedComponent } from './components/add-event-extended/add-event-extended.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     EventComponent,
     DateTransformerPipe,
     AddEventComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    AddEventExtendedComponent
   ],
   imports: [
     BrowserAnimationsModule,

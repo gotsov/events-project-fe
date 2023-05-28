@@ -17,7 +17,7 @@ export class EventService {
   add(event: Event): Observable<any> {
     const requestBody = JSON.stringify(event);
 
-    console.log(requestBody);
+    console.log("Request In event service: " + requestBody);
     return this.http.post('http://localhost:8080/api/events', requestBody, {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<any>;
   }
 }

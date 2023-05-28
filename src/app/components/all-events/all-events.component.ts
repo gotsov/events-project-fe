@@ -13,6 +13,17 @@ export class AllEventsComponent implements OnInit {
 
   showModal: boolean = false;
 
+  isExtensionVisible : boolean = false;
+
+  openExtension() {
+    console.log("openExtension() in all-events")
+    this.isExtensionVisible = true;
+  }
+
+  addEventWithExtension(eventData: any) {
+
+  }
+
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
@@ -28,6 +39,7 @@ export class AllEventsComponent implements OnInit {
   }
 
   showModalFunction() {
+    console.log("in showModalFunction")
     this.showModal = true;
   }
 

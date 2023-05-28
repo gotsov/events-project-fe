@@ -1,12 +1,8 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Event} from "../../models/Event";
 import {Tag} from "../../models/Tag";
 import {Venue} from "../../models/Venue";
 import {EventService} from "../../services/event.service";
-import {response} from "express";
-import {FormatDatePipe} from "../../pipes/format-date.pipe";
-import {Time} from "@angular/common";
 import {VenueService} from "../../services/venue.service";
 
 @Component({
@@ -18,6 +14,9 @@ export class AddEventComponent implements OnInit {
 
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output() openExtension: EventEmitter<void> = new EventEmitter<void>();
+  showExtended: boolean = false;
 
   constructor(private eventService: EventService,
               private venueService: VenueService) {
@@ -41,7 +40,23 @@ export class AddEventComponent implements OnInit {
   selectedVenue: string = '';
 
   close() {
+    this.refreshParent();
     this.closeModal.emit();
+  }
+
+  openExtensionClick(event: MouseEvent) {
+    console.log("in openExtensionClick")
+    event.stopPropagation();
+    this.showExtended = true;
+    this.openExtension.emit();
+  }
+
+  closeExtension() {
+    this.showExtended = false;
+  }
+
+  onExtensionRefresh() {
+    this.loadUserVenues();
   }
 
   onSubmit() {
@@ -57,12 +72,10 @@ export class AddEventComponent implements OnInit {
       },
       complete: () => {
         console.log("in complete before refresh")
-        this.refreshParent();
         this.close();
       },
       error: () => {
         console.log("in error before refresh")
-        this.refreshParent();
         this.close();
       }
       });
@@ -99,5 +112,9 @@ export class AddEventComponent implements OnInit {
 
   refreshParent() {
     this.refresh.emit();
+  }
+
+  showExtendedModal() {
+    this.showExtended = true;
   }
 }

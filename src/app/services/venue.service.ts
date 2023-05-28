@@ -11,6 +11,13 @@ export class VenueService {
 
   constructor(private http: HttpClient) { }
 
+  add(venue: Venue): Observable<any> {
+    const requestBody = JSON.stringify(venue);
+
+    console.log("Request In venue service: " + requestBody);
+    return this.http.post('http://localhost:8080/api/venues', requestBody, {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<any>;
+  }
+
   getAllVenuesCurrentUser(): Observable<Venue[]> {
     return this.http.get('http://localhost:8080/api/venues/current-user', {withCredentials: true}) as Observable<Venue[]>;
   }

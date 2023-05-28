@@ -2,6 +2,9 @@
 
 <div class="modal-container">
   <label id="title">Добави ново събитие</label>
+  <div class="close-icon">
+    <i class="nc-icon nc-simple-remove" (click)="close()"></i>
+  </div>
   <form (ngSubmit)="onSubmit()">
     <div>
       <label for="name">Име:</label>
@@ -20,9 +23,11 @@
 
     <div>
       <label for="venue">Място на събитието:</label>
-      <select id="venue" name="venue" [(ngModel)]="event.venue" (change)="onVenueChange($event)">
+      <select id="venue" name="venue" [(ngModel)]="selectedVenue" (change)="onVenueChange($event)">
+        <option value="" disabled selected>Избери място за твоето събитие</option>
         <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
       </select>
+      <button class="btn btn-primary btn-block" type="button" (click)="openExtensionClick($event)">Добави ново място</button>
     </div>
 
     <div>
@@ -42,6 +47,8 @@
 
     <button class="btn btn-primary btn-block" type="submit" (click)="onSubmit()">Добави събитие</button>
   </form>
+
+  <add-event-extended *ngIf="showExtended" (closeExtension)="closeExtension()" (refreshMainModal)="onExtensionRefresh()"></add-event-extended>
 </div>
 
 
