@@ -22,9 +22,10 @@ import { AllEventsComponent } from './components/all-events/all-events.component
 import { EventComponent } from './components/event/event.component';
 import { DateTransformerPipe } from './pipes/date-transformer.pipe';
 import { AddEventComponent } from './components/add-event/add-event.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormatDatePipe } from './pipes/format-date.pipe';
-import { AddEventExtendedComponent } from './components/add-event-extended/add-event-extended.component';
+import { AddEventVenueComponent } from './components/add-event-venue/add-event-venue.component';
+import { AddEventSectorComponent } from './components/add-event-sector/add-event-sector.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { AddEventExtendedComponent } from './components/add-event-extended/add-e
     DateTransformerPipe,
     AddEventComponent,
     FormatDatePipe,
-    AddEventExtendedComponent
+    AddEventVenueComponent,
+    AddEventSectorComponent
   ],
   imports: [
     BrowserAnimationsModule,

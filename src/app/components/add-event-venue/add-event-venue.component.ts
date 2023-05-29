@@ -5,12 +5,12 @@ import {Tag} from "../../models/Tag";
 import {VenueService} from "../../services/venue.service";
 
 @Component({
-  selector: 'add-event-extended',
-  templateUrl: './add-event-extended.component.html',
-  styleUrls: ['./add-event-extended.component.css']
+  selector: 'add-event-venue',
+  templateUrl: './add-event-venue.component.html',
+  styleUrls: ['./add-event-venue.component.css']
 })
-export class AddEventExtendedComponent implements OnInit {
-  @Output() closeExtension: EventEmitter<void> = new EventEmitter<void>();
+export class AddEventVenueComponent implements OnInit {
+  @Output() closeAddVenue: EventEmitter<void> = new EventEmitter<void>();
   @Output() refreshMainModal: EventEmitter<void> = new EventEmitter<void>();
 
   venue: Venue = {
@@ -43,6 +43,6 @@ export class AddEventExtendedComponent implements OnInit {
 
   close() {
     this.refreshMainModal.emit();
-    this.closeExtension.emit();
+    this.closeAddVenue.emit();
   }
 }

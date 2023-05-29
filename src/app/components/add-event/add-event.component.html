@@ -1,5 +1,3 @@
-<!--<div class="modal-overlay"></div>-->
-
 <div class="modal-container">
   <label id="title">Добави ново събитие</label>
   <div class="close-icon">
@@ -27,7 +25,10 @@
         <option value="" disabled selected>Избери място за твоето събитие</option>
         <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
       </select>
-      <button class="btn btn-primary btn-block" type="button" (click)="openExtensionClick($event)">Добави ново място</button>
+      <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)">Добави ново място</button>
+      <div *ngIf="isVenueSelected">
+        <button class="btn btn-primary btn-block" type="button" (click)="openSectorClick($event)">Избери цени за [{{selectedVenue}}]</button>
+      </div>
     </div>
 
     <div>
@@ -48,7 +49,8 @@
     <button class="btn btn-primary btn-block" type="submit" (click)="onSubmit()">Добави събитие</button>
   </form>
 
-  <add-event-extended *ngIf="showExtended" (closeExtension)="closeExtension()" (refreshMainModal)="onExtensionRefresh()"></add-event-extended>
+  <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()"></add-event-venue>
+  <add-event-sector *ngIf="showSectorPopup" (closeSector)="closeSector()" (refreshMainModal)="onAddVenueRefresh()"></add-event-sector>
 </div>
 
 

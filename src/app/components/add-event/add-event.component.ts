@@ -16,7 +16,6 @@ export class AddEventComponent implements OnInit {
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() openExtension: EventEmitter<void> = new EventEmitter<void>();
-  showExtended: boolean = false;
 
   constructor(private eventService: EventService,
               private venueService: VenueService) {
@@ -38,25 +37,43 @@ export class AddEventComponent implements OnInit {
 
   venues: Venue[];
   selectedVenue: string = '';
+  isVenueSelected: boolean = false;
+  showAddVenue: boolean = false;
+  showSectorPopup: boolean = false;
 
   close() {
     this.refreshParent();
     this.closeModal.emit();
   }
 
-  openExtensionClick(event: MouseEvent) {
+  openAddEventClick(event: MouseEvent) {
     console.log("in openExtensionClick")
-    event.stopPropagation();
-    this.showExtended = true;
-    this.openExtension.emit();
+    // event.stopPropagation();
+    this.showAddVenue = true;
+    // this.openExtension.emit();
   }
 
-  closeExtension() {
-    this.showExtended = false;
+  openSectorClick(event: MouseEvent) {
+    console.log("in openSectorClick")
+    // event.stopPropagation();
+    this.showSectorPopup = true;
+    // this.openExtension.emit();
   }
 
-  onExtensionRefresh() {
+  closeAddVenue() {
+    this.showAddVenue = false;
+  }
+
+  closeSector() {
+    this.showSectorPopup = false;
+  }
+
+  onAddVenueRefresh() {
     this.loadUserVenues();
+  }
+
+  onSectorRefresh() {
+
   }
 
   onSubmit() {
@@ -108,13 +125,10 @@ export class AddEventComponent implements OnInit {
 
   onVenueChange(event: any) {
     this.selectedVenue = event.target.value;
+    this.isVenueSelected = true;
   }
 
   refreshParent() {
     this.refresh.emit();
-  }
-
-  showExtendedModal() {
-    this.showExtended = true;
   }
 }
