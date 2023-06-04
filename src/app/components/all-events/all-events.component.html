@@ -16,7 +16,7 @@
 
 <div class="event-container">
   <div *ngFor="let event of events">
-    <event [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"></event>
+    <event-card [id]="event.id" [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name" (click)="redirectToEvent(event.id)"></event-card>
   </div>
 </div>
 

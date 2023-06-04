@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'all-events',
@@ -24,7 +25,8 @@ export class AllEventsComponent implements OnInit {
 
   }
 
-  constructor(private eventService: EventService) { }
+  constructor(private router: Router,
+              private eventService: EventService) { }
 
   ngOnInit(): void {
     this.loadEvents();
@@ -51,5 +53,9 @@ export class AllEventsComponent implements OnInit {
     console.log("in refresh in parent")
     this.loadEvents();
     console.log("after loadEvents in refresh in parent")
+  }
+
+  redirectToEvent(eventId: number) {
+    this.router.navigate(['/event', eventId]);
   }
 }

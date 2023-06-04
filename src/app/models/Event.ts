@@ -2,6 +2,7 @@ import {Venue} from "./Venue";
 import {Tag} from "./Tag";
 
 export interface Event {
+  id: number,
   name: string;
   startDate: Date;
   endDate: Date;

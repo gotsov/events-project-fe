@@ -1,5 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DateTransformerPipe} from "../../pipes/date-transformer.pipe";
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {EventService} from "../../services/event.service";
+import {Event} from "../../models/Event";
+import {Venue} from "../../models/Venue";
+import {Tag} from "../../models/Tag";
 
 @Component({
   selector: 'event',
@@ -7,12 +11,34 @@ import {DateTransformerPipe} from "../../pipes/date-transformer.pipe";
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  @Input() title: string;
-  @Input() date: Date;
-  @Input() venueName: string;
-  constructor() { }
+  eventId: string;
+  event: Event = {
+    id: 0,
+    name: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    description: '',
+    venue: new Venue(),
+    tags: new Array<Tag>()
+  };
+
+  constructor(private route: ActivatedRoute,
+              private eventService: EventService) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+
+      this.loadEvent();
+    });
+  }
+
+  loadEvent() {
+    this.eventService.getById(this.eventId).subscribe({
+      next: response => {
+        this.event = response;
+      }
+    })
   }
 
 }

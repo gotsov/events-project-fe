@@ -19,13 +19,15 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './components/register/register.component';
 import { AllEventsComponent } from './components/all-events/all-events.component';
-import { EventComponent } from './components/event/event.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 import { DateTransformerPipe } from './pipes/date-transformer.pipe';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { AddEventVenueComponent } from './components/add-event-venue/add-event-venue.component';
 import { AddEventSectorComponent } from './components/add-event-sector/add-event-sector.component';
+import { EventComponent } from './components/event/event.component';
+import { EditEventComponent } from './components/edit-event/edit-event.component';
 
 
 @NgModule({
@@ -36,12 +38,14 @@ import { AddEventSectorComponent } from './components/add-event-sector/add-event
     LoginComponent,
     RegisterComponent,
     AllEventsComponent,
-    EventComponent,
+    EventCardComponent,
     DateTransformerPipe,
     AddEventComponent,
     FormatDatePipe,
     AddEventVenueComponent,
-    AddEventSectorComponent
+    AddEventSectorComponent,
+    EventComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserAnimationsModule,

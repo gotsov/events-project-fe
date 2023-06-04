@@ -1,26 +1,26 @@
-<div class="col-lg-3 col-md-6 col-sm-6" class="event-box">
-  <div class="card card-stats">
-    <div class="card-body ">
-      <div class="row" id="test1">
-<!--        <div class="col-5 col-md-4">-->
-<!--          <div class="icon-big text-center icon-warning">-->
-<!--            <i class="nc-icon nc-globe text-warning"></i>-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="col">
-          <div class="numbers" id="test2">
-            <p class="card-category">{{ date | dateTransformer:'dd/MM/yyyy' }}</p>
-            <p class="card-title">{{title}}<p>
-            <p class="card-pricing">15лв. - 50лв.<p>
-          </div>
-        </div>
-      </div>
+<div class="event-container">
+  <div class="event-box">
+    <div class="event-header">
+      <h1>{{ event.name }}</h1>
+      <p>{{ event.startDate | date: 'dd.MM.yyyy, HH:mm' }} - {{ event.endDate | date: 'dd.MM.yyyy, HH:mm' }}</p>
+      <p>
+        <i class="nc-icon nc-pin-3"></i>
+        {{ event.venue.name }}
+      </p>
     </div>
-    <div class="card-footer ">
-      <hr>
-      <div class="stats">
-        {{venueName}}
-      </div>
+    <div class="event-tags-container">
+      <ul class="event-tags">
+        <li *ngFor="let tag of event.tags">{{ tag.name }}</li>
+      </ul>
+    </div>
+    <div class="details">
+      <h3>Описание: </h3>
+      <p>{{ event.description }}</p>
+    </div>
+    <div class="details">
+      <h3>Информация за мястото: </h3>
+      <p>{{ event.venue.description }}</p>
+      <!-- Include other venue details as needed -->
     </div>
   </div>
 </div>

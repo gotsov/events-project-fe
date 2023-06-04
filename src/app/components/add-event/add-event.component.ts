@@ -4,6 +4,7 @@ import {Tag} from "../../models/Tag";
 import {Venue} from "../../models/Venue";
 import {EventService} from "../../services/event.service";
 import {VenueService} from "../../services/venue.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'add-event',
@@ -17,7 +18,8 @@ export class AddEventComponent implements OnInit {
 
   @Output() openExtension: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private eventService: EventService,
+  constructor(private router: Router,
+              private eventService: EventService,
               private venueService: VenueService) {
   }
 
@@ -26,6 +28,7 @@ export class AddEventComponent implements OnInit {
   }
 
   event: Event = {
+    id: 0,
     name: '',
     startDate: new Date(),
     endDate: new Date(),
@@ -48,16 +51,12 @@ export class AddEventComponent implements OnInit {
 
   openAddEventClick(event: MouseEvent) {
     console.log("in openExtensionClick")
-    // event.stopPropagation();
     this.showAddVenue = true;
-    // this.openExtension.emit();
   }
 
   openSectorClick(event: MouseEvent) {
     console.log("in openSectorClick")
-    // event.stopPropagation();
     this.showSectorPopup = true;
-    // this.openExtension.emit();
   }
 
   closeAddVenue() {
@@ -85,7 +84,12 @@ export class AddEventComponent implements OnInit {
 
     this.eventService.add(this.event).subscribe({
       next: response => {
+        console.log('In add() event');
+        console.log("event.id = " + response.id);
+        console.log("event.name = " + response.name);
+        const newEventId = response.id;
         console.log('Event added successfully:', response);
+        this.router.navigate(['/event', newEventId]);
       },
       complete: () => {
         console.log("in complete before refresh")
@@ -116,6 +120,7 @@ export class AddEventComponent implements OnInit {
   }
 
   loadUserVenues() {
+    console.log("in loadUserVenues()")
     this.venueService.getAllVenuesCurrentUser().subscribe({
       next: result => {
         this.venues = result;

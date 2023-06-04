@@ -14,10 +14,14 @@ export class EventService {
     return this.http.get('http://localhost:8080/api/events', {withCredentials: true}) as Observable<Event[]>;
   }
 
-  add(event: Event): Observable<any> {
+  getById(id: string): Observable<Event> {
+    return this.http.get(`http://localhost:8080/api/events/${id}`, {withCredentials: true}) as Observable<Event>;
+  }
+
+  add(event: Event): Observable<Event> {
     const requestBody = JSON.stringify(event);
 
     console.log("Request In event service: " + requestBody);
-    return this.http.post('http://localhost:8080/api/events', requestBody, {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<any>;
+    return this.http.post('http://localhost:8080/api/events', requestBody, {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<Event>;
   }
 }
