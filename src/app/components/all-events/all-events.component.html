@@ -16,12 +16,12 @@
 
 <div class="event-container">
   <div *ngFor="let event of events">
-    <event-card [id]="event.id" [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name" (click)="redirectToEvent(event.id)"></event-card>
+    <event-card [id]="event.id" [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"
+                [venueCity]="event.venue.city" (click)="redirectToEvent(event.id)"></event-card>
   </div>
 </div>
 
 <div class="modal-wrapper">
   <add-event *ngIf="showModal" (closeModal)="hideModal()" (refresh)="onChildRefresh()" (openExtension)="openExtension()"></add-event>
-<!--  <add-event-venue *ngIf="isExtensionVisible" (addEventWithExtension)="addEventWithExtension($event)"></add-event-venue>-->
 </div>
 

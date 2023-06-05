@@ -11,6 +11,7 @@ export class EventCardComponent implements OnInit {
   @Input() title: string;
   @Input() date: Date;
   @Input() venueName: string;
+  @Input() venueCity: string;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-.modal-extension {
+.modal-extension-add-event {
   position: absolute;
   top: 0;
   left: 100%;
@@ -11,26 +11,39 @@
   margin-left: 10px;
 }
 
-.modal-extension h2 {
+.modal-extension-edit-event {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.modal-extension-add-event h2 {
   font-size: 20px;
   font-weight: bold;
   margin-top: 0;
 }
 
-.modal-extension label {
+.modal-extension-add-event label {
   display: block;
   margin-bottom: 8px;
 }
 
-.modal-extension input,
-.modal-extension textarea,
-.modal-extension select {
+.modal-extension-add-event input,
+.modal-extension-add-event textarea,
+.modal-extension-add-event select {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
 }
 
-.modal-extension button {
+.modal-extension-add-event button {
   background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
@@ -39,7 +52,39 @@
   cursor: pointer;
 }
 
-.modal-extension button:hover {
+.modal-extension-add-event button:hover {
+  background-color: #45a049;
+}
+
+.modal-extension-edit-event h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.modal-extension-edit-event label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.modal-extension-edit-event input,
+.modal-extension-edit-event textarea,
+.modal-extension-edit-event select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.modal-extension-edit-event button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-extension-edit-event button:hover {
   background-color: #45a049;
 }
 

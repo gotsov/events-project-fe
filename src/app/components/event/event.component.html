@@ -1,26 +1,67 @@
-<div class="event-container">
-  <div class="event-box">
-    <div class="event-header">
-      <h1>{{ event.name }}</h1>
-      <p>{{ event.startDate | date: 'dd.MM.yyyy, HH:mm' }} - {{ event.endDate | date: 'dd.MM.yyyy, HH:mm' }}</p>
-      <p>
-        <i class="nc-icon nc-pin-3"></i>
-        {{ event.venue.name }}
-      </p>
+<div class="container">
+  <div class="event-container">
+    <div class="event-box">
+      <div class="event-header">
+
+        <h1 *ngIf="!isEditMode">{{ event.name }}</h1>
+        <input class="event-name-input" type="text" [(ngModel)]="event.name" *ngIf="isEditMode">
+
+        <p *ngIf="!isEditMode">
+          <i class="nc-icon nc-watch-time"></i>
+          {{ event.startDate | date: 'dd.MM.yyyy, HH:mm' }} - {{ event.endDate | date: 'dd.MM.yyyy, HH:mm' }}
+        </p>
+        <input type="datetime-local" id="start-date" name="start-date" [(ngModel)]="event.startDate" *ngIf="isEditMode">
+        <input type="datetime-local" id="end-date" name="end-date" [(ngModel)]="event.endDate" *ngIf="isEditMode">
+
+        <div>
+          <p *ngIf="!isEditMode">
+            <i class="nc-icon nc-pin-3"></i>
+            {{ event.venue.name }}, {{event.venue.city}}, {{event.venue.address}}
+          </p>
+          <select id="venue" name="venue" [(ngModel)]="selectedVenueValue" (change)="onVenueChange($event)" *ngIf="isEditMode">
+            <option selected>{{ selectedVenueValue }}</option>
+            <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
+          </select>
+          <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)" *ngIf="isEditMode">Добави ново място</button>
+        </div>
+
+      </div>
+
+      <div class="event-tags-container" *ngIf="!isEditMode">
+        <ul class="event-tags">
+          <li *ngFor="let tag of event.tags">{{ tag.name }}</li>
+        </ul>
+      </div>
+      <div class="event-tags-container" *ngIf="isEditMode">
+        <input type="text" id="tags" name="tags" placeholder="Добави тагове тук" [(ngModel)]="tagInput" (keydown.enter)="$event.preventDefault(); addTag()">
+        <ul class="event-tags">
+          <li *ngFor="let tag of event.tags" (click)="removeTag(tag)">{{ tag.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="details" *ngIf="!isEditMode">
+        <h3>Описание: </h3>
+        <p>{{ event.description }}</p>
+      </div>
+      <div class="details" *ngIf="isEditMode">
+        <h3>Описание: </h3>
+        <textarea id="description" name="description" [(ngModel)]="event.description" required></textarea>
+      </div>
+
+      <div class="details" *ngIf="!isEditMode">
+        <h3>Информация за мястото: </h3>
+        <p>{{ event.venue.description }}</p>
+      </div>
+      <div class="details" *ngIf="isEditMode">
+        <h3>Информация за мястото: </h3>
+        <textarea id="venue-description" name="venue-description" [(ngModel)]="selectedVenue.description"></textarea>
+      </div>
+
+      <button class="btn btn-primary btn-block" (click)="edit()" *ngIf="!isEditMode">Редактирай</button>
+      <button class="btn btn-primary btn-block" (click)="saveChanges()" *ngIf="isEditMode">Запази</button>
     </div>
-    <div class="event-tags-container">
-      <ul class="event-tags">
-        <li *ngFor="let tag of event.tags">{{ tag.name }}</li>
-      </ul>
-    </div>
-    <div class="details">
-      <h3>Описание: </h3>
-      <p>{{ event.description }}</p>
-    </div>
-    <div class="details">
-      <h3>Информация за мястото: </h3>
-      <p>{{ event.venue.description }}</p>
-      <!-- Include other venue details as needed -->
-    </div>
+
+    <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>
   </div>
 </div>

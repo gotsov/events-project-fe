@@ -21,4 +21,8 @@ export class VenueService {
   getAllVenuesCurrentUser(): Observable<Venue[]> {
     return this.http.get('http://localhost:8080/api/venues/current-user', {withCredentials: true}) as Observable<Venue[]>;
   }
+
+  getByName(name: string): Observable<Venue> {
+    return this.http.get(`http://localhost:8080/api/venues/name/${name}`, {withCredentials: true}) as Observable<Venue>;
+  }
 }
