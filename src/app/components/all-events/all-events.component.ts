@@ -3,6 +3,7 @@ import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
+import {response} from "express";
 
 @Component({
   selector: 'all-events',
@@ -12,10 +13,15 @@ import {AuthService} from "../../services/auth.service";
 export class AllEventsComponent implements OnInit {
 
   events: Event[];
+  filteredEvents: Event[];
 
   showModal: boolean = false;
   isAdminOrOrganizer: boolean = false;
   isExtensionVisible : boolean = false;
+  availableTags: string[] = [];
+  selectedTags: string[] = [];
+  showOnlyMyEvents: boolean = false;
+
 
   openExtension() {
     console.log("openExtension() in all-events")
@@ -27,9 +33,8 @@ export class AllEventsComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log("ngOnInit all-events")
     this.loadEvents();
-    console.log("after this.loadEvents()")
+    this.loadAllTags();
     this.getUserRole();
   }
 
@@ -39,10 +44,25 @@ export class AllEventsComponent implements OnInit {
         console.log(events)
         this.events = events;
       },
+      complete: () => {
+        this.filteredEvents = this.events;
+      },
       error: err => {
         console.log("error: " + err);
       }
     });
+  }
+
+  loadAllTags() {
+    this.eventService.getAllTags().subscribe({
+      next: response => {
+        console.log("response = " + response)
+        this.availableTags = response;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
   }
 
   showModalFunction() {
@@ -73,5 +93,54 @@ export class AllEventsComponent implements OnInit {
         console.log(err)
       },
     })
+  }
+
+  isDropdownOpen: boolean = false;
+
+  toggleDropdown(dropdown: any): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    dropdown.classList.toggle('show');
+  }
+
+  toggleTagSelection(tag: string, eventObj: any): void {
+    eventObj.preventDefault(); // Prevent the default behavior
+
+    if (this.isTagSelected(tag)) {
+      this.selectedTags = this.selectedTags.filter(selectedTag => selectedTag !== tag);
+    } else {
+      this.selectedTags.push(tag);
+    }
+
+    this.filterEventsByTags();
+  }
+
+  filterEventsByTags(): void {
+    if (this.selectedTags.length === 0) {
+      // No tags selected, show all events
+      this.filteredEvents = [...this.events];
+    } else {
+      this.filteredEvents = this.events.filter(event =>
+        this.selectedTags.every(selectedTag =>
+          event.tags.some(tag => tag.name === selectedTag)
+        )
+      );
+    }
+  }
+
+  isTagSelected(tag: string): boolean {
+    return this.selectedTags.includes(tag);
+  }
+
+  filterEventsByUser(): void {
+    console.log("toggle = " + this.showOnlyMyEvents)
+    if (this.showOnlyMyEvents) {
+      this.eventService.getCurrentUserEvents().subscribe({
+        next: response => {
+          this.filteredEvents = response;
+        }
+      })
+    } else {
+      this.loadEvents();
+    }
   }
 }

@@ -16,7 +16,76 @@
   align-items:  center;
 }
 
-#test {
+#add-new {
   margin-left: 10px;
   margin-bottom: 10px;
+}
+
+#sort {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#show-my-events-text {
+  margin-right: 10px;
+}
+
+.my-events-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  border-radius: 30px;
+  background-color: #ccc;
+  transition: background-color 0.3s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: #2196F3;
+}
+
+.toggle-input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-text {
+  font-size: 12px;
+  color: #333;
+  margin-right: 5px;
 }

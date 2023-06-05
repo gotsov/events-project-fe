@@ -1,5 +1,30 @@
 <form>
   <div class="container">
+
+    <div *ngIf="isAdminOrOrganizer" class="my-events-container">
+      <p id="show-my-events-text">Моите събития</p>
+      <div class="toggle-container">
+        <label class="toggle-label">
+          <input type="checkbox" class="toggle-input" [(ngModel)]="showOnlyMyEvents" (change)="filterEventsByUser()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="dropdown" #dropdown id="sort">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="tagFilterDropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown(dropdown)">
+        Сортирай
+      </button>
+      <div class="dropdown-menu" aria-labelledby="tagFilterDropdown" [ngClass]="{ 'show': isDropdownOpen }">
+        <a class="dropdown-item" href="#" (click)="toggleTagSelection(tag, $event)" *ngFor="let tag of availableTags">
+          {{ tag }}
+          <i class="nc-icon nc-check-2" *ngIf="isTagSelected(tag)"></i>
+        </a>
+      </div>
+    </div>
+
+
     <div class="input-group no-border">
       <input type="text" value="" class="form-control" placeholder="Търси...">
       <div class="input-group-append">
@@ -8,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div id="test">
+    <div id="add-new">
       <button class="btn btn-primary btn-block" type="submit" (click)="showModalFunction()"
               *ngIf="isAdminOrOrganizer">Добави</button>
     </div>
@@ -16,7 +41,7 @@
 </form>
 
 <div class="event-container">
-  <div *ngFor="let event of events">
+  <div *ngFor="let event of filteredEvents">
     <event-card [id]="event.id" [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"
                 [venueCity]="event.venue.city" (click)="redirectToEvent(event.id)"></event-card>
   </div>

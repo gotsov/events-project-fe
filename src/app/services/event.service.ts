@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Event} from "../models/Event";
+import {Tag} from "../models/Tag";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,16 @@ export class EventService {
     return this.http.get('http://localhost:8080/api/events', {withCredentials: true}) as Observable<Event[]>;
   }
 
+  getAllTags(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/api/events/tags/all', { withCredentials: true });
+  }
+
   getById(id: number): Observable<Event> {
     return this.http.get(`http://localhost:8080/api/events/${id}`, {withCredentials: true}) as Observable<Event>;
+  }
+
+  getCurrentUserEvents(): Observable<Event[]> {
+    return this.http.get(`http://localhost:8080/api/events/current-user`, {withCredentials: true}) as Observable<Event[]>;
   }
 
   add(event: Event): Observable<Event> {
