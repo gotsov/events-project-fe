@@ -26,9 +26,6 @@
         <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
       </select>
       <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)">Добави ново място</button>
-      <div *ngIf="isVenueSelected">
-        <button class="btn btn-primary btn-block" type="button" (click)="openSectorClick($event)">Избери цени за [{{selectedVenue}}]</button>
-      </div>
     </div>
 
     <div>

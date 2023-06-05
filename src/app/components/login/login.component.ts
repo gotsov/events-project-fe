@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 
 @Component({
@@ -11,7 +12,10 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   credentials = {email: '', password: ''}
-  constructor(private loginService: LoginService, private http: HttpClient, private router: Router) { }
+  constructor(private loginService: LoginService,
+              private authService: AuthService,
+              private http: HttpClient,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +28,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(formData).subscribe({
       next: () => {
         this.router.navigate(['/home']);
+      },
+      complete: () => {
+        this.authService.setUser();
       },
       error: () => {
         alert('Invalid username or password');

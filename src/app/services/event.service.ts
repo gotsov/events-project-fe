@@ -14,7 +14,7 @@ export class EventService {
     return this.http.get('http://localhost:8080/api/events', {withCredentials: true}) as Observable<Event[]>;
   }
 
-  getById(id: string): Observable<Event> {
+  getById(id: number): Observable<Event> {
     return this.http.get(`http://localhost:8080/api/events/${id}`, {withCredentials: true}) as Observable<Event>;
   }
 

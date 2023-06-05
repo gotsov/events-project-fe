@@ -9,7 +9,8 @@
       </div>
     </div>
     <div id="test">
-      <button class="btn btn-primary btn-block" type="submit" (click)="showModalFunction()">Добави</button>
+      <button class="btn btn-primary btn-block" type="submit" (click)="showModalFunction()"
+              *ngIf="isAdminOrOrganizer">Добави</button>
     </div>
   </div>
 </form>

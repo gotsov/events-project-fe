@@ -1,5 +1,6 @@
 import {Venue} from "./Venue";
 import {Tag} from "./Tag";
+import {UserInfo} from "./UserInfo";
 
 export interface Event {
   id: number,
@@ -8,5 +9,6 @@ export interface Event {
   endDate: Date;
   description: string;
   venue: Venue;
+  user: UserInfo;
   tags: Tag[];
 }

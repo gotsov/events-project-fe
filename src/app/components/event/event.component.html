@@ -25,6 +25,12 @@
           <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)" *ngIf="isEditMode">Добави ново място</button>
         </div>
 
+        <div>
+          <p>
+            <i class="nc-icon nc-single-02"></i>
+            Организатор: {{event.user.firstName}} {{event.user.lastName}}
+          </p>
+        </div>
       </div>
 
       <div class="event-tags-container" *ngIf="!isEditMode">
@@ -58,8 +64,12 @@
         <textarea id="venue-description" name="venue-description" [(ngModel)]="selectedVenue.description"></textarea>
       </div>
 
-      <button class="btn btn-primary btn-block" (click)="edit()" *ngIf="!isEditMode">Редактирай</button>
+      <button class="btn btn-primary btn-block" (click)="edit()" *ngIf="!isEditMode && isAdminOrOrganizer">Редактирай</button>
       <button class="btn btn-primary btn-block" (click)="saveChanges()" *ngIf="isEditMode">Запази</button>
+    </div>
+
+    <div class="event-box">
+      <button class="btn btn-primary btn-block">Купи билети</button>
     </div>
 
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>

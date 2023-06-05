@@ -3,9 +3,11 @@ import {ActivatedRoute} from "@angular/router";
 import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
 import {Venue} from "../../models/Venue";
+import {UserInfo} from "../../models/UserInfo";
 import {Tag} from "../../models/Tag";
 import {Sector} from "../../models/Sector";
 import {VenueService} from "../../services/venue.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'event',
@@ -13,7 +15,7 @@ import {VenueService} from "../../services/venue.service";
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  eventId: string;
+  eventId: number;
   event: Event = {
     id: 0,
     name: '',
@@ -21,6 +23,7 @@ export class EventComponent implements OnInit {
     endDate: new Date(),
     description: '',
     venue: new Venue(),
+    user: new UserInfo(),
     tags: new Array<Tag>()
   };
 
@@ -39,18 +42,21 @@ export class EventComponent implements OnInit {
   isEditMode: boolean = false;
   isVenueSelected: boolean = false;
   showAddVenue: boolean = false;
+  isAdminOrOrganizer: boolean = false;
   tagInput: string;
 
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
-              private venueService: VenueService) { }
+              private venueService: VenueService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.eventId = params.get('id');
+      this.eventId = parseInt(params.get('id'));
 
       this.loadEvent();
       this.loadSectors();
+      this.getUserRole();
     });
   }
 
@@ -132,5 +138,18 @@ export class EventComponent implements OnInit {
 
   openAddEventClick(event: MouseEvent) {
     this.showAddVenue = true;
+  }
+
+  getUserRole() {
+    console.log("getUserRole in all-events")
+    this.authService.isUserEventOrganizer(this.eventId).subscribe({
+      next: response => {
+        console.log("response = " + response)
+        this.isAdminOrOrganizer = response;
+      },
+      error: err => {
+        console.log(err)
+      },
+    })
   }
 }

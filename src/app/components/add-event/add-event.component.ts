@@ -5,6 +5,7 @@ import {Venue} from "../../models/Venue";
 import {EventService} from "../../services/event.service";
 import {VenueService} from "../../services/venue.service";
 import {Router} from "@angular/router";
+import {UserInfo} from "../../models/UserInfo";
 
 @Component({
   selector: 'add-event',
@@ -34,6 +35,7 @@ export class AddEventComponent implements OnInit {
     endDate: new Date(),
     description: '',
     venue: new Venue(),
+    user: new UserInfo(),
     tags: new Array<Tag>()
   };
   tagInput: string;
