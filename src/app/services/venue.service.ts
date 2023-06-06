@@ -25,4 +25,8 @@ export class VenueService {
   getByName(name: string): Observable<Venue> {
     return this.http.get(`http://localhost:8080/api/venues/name/${name}`, {withCredentials: true}) as Observable<Venue>;
   }
+
+  getById(id: number): Observable<Venue> {
+    return this.http.get(`http://localhost:8080/api/venues/${id}`, {withCredentials: true}) as Observable<Venue>;
+  }
 }

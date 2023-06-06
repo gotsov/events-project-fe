@@ -28,20 +28,22 @@ export class EventComponent implements OnInit {
   };
 
   selectedVenue: Venue = {
+    id: 0,
     name: '',
     city: '',
     address: '',
-    description: ''
+    description: '',
+    sectors: []
   };
 
   selectedVenueValue: string = '';
 
-  sectors: Sector[];
   venues: Venue[];
 
   isEditMode: boolean = false;
   isVenueSelected: boolean = false;
   showAddVenue: boolean = false;
+  showEditTickets: boolean = false;
   isAdminOrOrganizer: boolean = false;
   tagInput: string;
 
@@ -132,12 +134,20 @@ export class EventComponent implements OnInit {
     this.showAddVenue = false;
   }
 
+  closeEditTickets() {
+    this.showEditTickets = false;
+  }
+
   onAddVenueRefresh() {
     this.loadUserVenues();
   }
 
   openAddEventClick(event: MouseEvent) {
     this.showAddVenue = true;
+  }
+
+  openEditTicketsClick(event: MouseEvent) {
+    this.showEditTickets = true;
   }
 
   getUserRole() {

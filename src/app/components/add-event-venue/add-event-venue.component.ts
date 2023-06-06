@@ -17,10 +17,12 @@ export class AddEventVenueComponent implements OnInit {
   @Input() caller: string;
 
   venue: Venue = {
+    id: 0,
     name: '',
     city: '',
     address: '',
-    description: ''
+    description: '',
+    sectors: []
   };
 
   constructor(private venueService: VenueService) { }

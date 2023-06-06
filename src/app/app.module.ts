@@ -28,6 +28,7 @@ import { AddEventVenueComponent } from './components/add-event-venue/add-event-v
 import { AddEventSectorComponent } from './components/add-event-sector/add-event-sector.component';
 import { EventComponent } from './components/event/event.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
+import { EditTicketsComponent } from './components/edit-tickets/edit-tickets.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { EditEventComponent } from './components/edit-event/edit-event.component
     AddEventVenueComponent,
     AddEventSectorComponent,
     EventComponent,
-    EditEventComponent
+    EditEventComponent,
+    EditTicketsComponent
   ],
   imports: [
     BrowserAnimationsModule,

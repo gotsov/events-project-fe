@@ -20,12 +20,12 @@
     </div>
 
     <div>
-      <label for="venue">Място на събитието:</label>
+      <label for="venue">Локация на събитието:</label>
       <select id="venue" name="venue" [(ngModel)]="selectedVenue" (change)="onVenueChange($event)">
-        <option value="" disabled selected>Избери място за твоето събитие</option>
+        <option value="" disabled selected>Избери локация за твоето събитие</option>
         <option *ngFor="let venue of venues" [value]="venue.name">{{ venue.name }}</option>
       </select>
-      <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)">Добави ново място</button>
+      <button class="btn btn-primary btn-block" type="button" (click)="openAddEventClick($event)">Добави нова локация</button>
     </div>
 
     <div>

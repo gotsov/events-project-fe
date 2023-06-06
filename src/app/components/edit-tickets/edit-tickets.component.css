@@ -1,0 +1,185 @@
+.modal-edit-tickets {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+.sector-info {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.sector-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.sector-info p {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+#sectorSelect {
+  font-size: 16px;
+  width: 100%;
+}
+
+ul.selected-sectors {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.selected-sectors li {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+ul.selected-sectors li:last-child {
+  margin-bottom: 0;
+}
+
+button.add-sector-button {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 60px; /* Increase the width to accommodate the text */
+  height: 30px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  border-radius: 30px;
+  background-color: #ccc;
+  transition: background-color 0.3s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: #2196F3;
+}
+
+.toggle-input:checked + .toggle-slider:before {
+  transform: translateX(30px); /* Increase the translateX value to move the thumb further */
+}
+
+.toggle-text {
+  font-size: 12px;
+  color: #333;
+  position: absolute;
+  left: 5px;
+  transition: opacity 0.3s;
+  opacity: 1; /* Initial opacity to show "Избери" */
+}
+
+.toggle-input:checked + .toggle-slider ~ .toggle-text {
+  opacity: 0; /* Set opacity to 0 to hide "Избери" on the on position */
+}
+
+.toggle-input:checked + .toggle-slider ~ .toggle-text::after {
+  content: "Добави"; /* Add "Добави" text after hiding "Избери" */
+  opacity: 1;
+}
+
+.selected-sectors {
+  max-height: 150px; /* Adjust the maximum height as needed */
+  overflow-y: auto;
+}
+
+.new-line {
+  display: block;
+}

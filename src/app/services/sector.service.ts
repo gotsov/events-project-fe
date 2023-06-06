@@ -16,6 +16,6 @@ export class SectorService {
 
     console.log("Request In sector service: " + requestBody);
     return this.http.post('http://localhost:8080/api/sectors', requestBody,
-      {headers: {'Content-Type': 'application/json'}, params, withCredentials: true}) as Observable<Sector>;
+      {headers: {'Content-Type': 'application/json'}, params, withCredentials: true, responseType: 'text' as 'json'}) as Observable<Sector>;
   }
 }

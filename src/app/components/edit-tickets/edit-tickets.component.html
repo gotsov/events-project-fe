@@ -1,0 +1,66 @@
+<div class="modal-edit-tickets">
+  <div class="modal-header">
+    <h3 class="modal-title">Сектори - Билети</h3>
+    <div class="close-icon">
+      <i class="nc-icon nc-simple-remove" (click)="close()"></i>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="save()">
+
+      <div class="toggle-container">
+        <span class="toggle-text-left">Избери</span>
+        <label class="toggle-label">
+          <input type="checkbox" class="toggle-input" [(ngModel)]="showAddNewSector" (change)="filterEventsByUser()">
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-text-right">Добави</span>
+      </div>
+
+
+      <div *ngIf="!showAddNewSector">
+        <label for="sectorSelect">Сектори: </label>
+        <select id="sectorSelect" [(ngModel)]="selectedSectorNameSelect" (change)="onSelectedSectorChanged($event.target.value)">
+          <option *ngFor="let sector of venue.sectors" [value]="sector.name">{{ sector.name }}</option>
+        </select>
+
+        <div class="sector-info" *ngIf="selectedSector">
+          <h3>{{ selectedSector.name }}</h3>
+          <p>Брой билети: {{ selectedSector.numberOfTickets }}</p>
+          <p>Цена: {{ selectedSector.price }} лв.</p>
+        </div>
+
+        <button class="add-sector-button" (click)="addNewSectorToSelected()">Добави за събитие</button>
+
+        <label>Избрани сектори:</label>
+        <ul class="selected-sectors">
+          <li *ngFor="let sector of selectedSectors" (click)="removeSector(sector)">
+            {{ sector.name }} - Билити: {{ sector.numberOfTickets }} - Цена: {{ sector.price }} лв.
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="showAddNewSector">
+        <label for="sectorSelect">Добави сектор за "{{venue.name}}": </label>
+
+        <input type="text" [(ngModel)]="newSectorName" placeholder="Име на сектор">
+        <input type="number" [(ngModel)]="newSectorNumberOfTickets" placeholder="Брой билети">
+        <input type="number" [(ngModel)]="newSectorPrice" placeholder="Цена на билет">
+
+        <button class="add-sector-button" (click)="addNewSector()">Добави сектор за локацията</button>
+      </div>
+
+      <div>
+        <label for="sectorSelect">Брой билети: {{totalNumberOfTickets}}</label>
+        <label class="new-line" for="sectorSelect">Обща цена: {{totalPrice.toFixed(2)}} лв.</label>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Запази</button>
+        <button class="btn btn-secondary" type="button" (click)="close()">Отмени</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
