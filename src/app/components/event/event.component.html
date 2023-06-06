@@ -74,6 +74,6 @@
     </div>
 
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>
-    <edit-tickets *ngIf="showEditTickets" (closeEditTickets)="closeEditTickets()" [venue]="event.venue"></edit-tickets>
+    <edit-tickets *ngIf="showEditTickets" (closeEditTickets)="closeEditTickets()" [event]="this.event" ></edit-tickets>
   </div>
 </div>

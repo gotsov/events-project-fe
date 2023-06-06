@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="save()">
+    <form (ngSubmit)="generateTickets()">
 
       <div class="toggle-container">
         <span class="toggle-text-left">Избери</span>
@@ -21,7 +21,7 @@
       <div *ngIf="!showAddNewSector">
         <label for="sectorSelect">Сектори: </label>
         <select id="sectorSelect" [(ngModel)]="selectedSectorNameSelect" (change)="onSelectedSectorChanged($event.target.value)">
-          <option *ngFor="let sector of venue.sectors" [value]="sector.name">{{ sector.name }}</option>
+          <option *ngFor="let sector of event.venue.sectors" [value]="sector.name">{{ sector.name }}</option>
         </select>
 
         <div class="sector-info" *ngIf="selectedSector">
@@ -30,18 +30,18 @@
           <p>Цена: {{ selectedSector.price }} лв.</p>
         </div>
 
-        <button class="add-sector-button" (click)="addNewSectorToSelected()">Добави за събитие</button>
+        <button class="add-sector-button" type="button" (click)="addNewSectorToSelected()">Добави за събитие</button>
 
         <label>Избрани сектори:</label>
         <ul class="selected-sectors">
           <li *ngFor="let sector of selectedSectors" (click)="removeSector(sector)">
-            {{ sector.name }} - Билити: {{ sector.numberOfTickets }} - Цена: {{ sector.price }} лв.
+            {{ sector.name }} - Билети: {{ sector.numberOfTickets }} - Цена: {{ sector.price }} лв.
           </li>
         </ul>
       </div>
 
       <div *ngIf="showAddNewSector">
-        <label for="sectorSelect">Добави сектор за "{{venue.name}}": </label>
+        <label for="sectorSelect">Добави сектор за "{{event.venue.name}}": </label>
 
         <input type="text" [(ngModel)]="newSectorName" placeholder="Име на сектор">
         <input type="number" [(ngModel)]="newSectorNumberOfTickets" placeholder="Брой билети">
@@ -56,9 +56,12 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">Запази</button>
-        <button class="btn btn-secondary" type="button" (click)="close()">Отмени</button>
+        <div class="button-group">
+          <button class="btn btn-primary" type="submit" [disabled]="selectedSectors.length === 0">Генерирай билети</button>
+          <button class="btn btn-secondary" type="button" (click)="close()">Отмени</button>
+        </div>
       </div>
+
     </form>
   </div>
 </div>

@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Sector} from "../../models/Sector";
-import {Venue} from "../../models/Venue";
+import {Event} from "../../models/Event";
 import {SectorService} from "../../services/sector.service";
 import {VenueService} from "../../services/venue.service";
+import {TicketService} from "../../services/ticket.service";
+import {Ticket} from "../../models/Ticket";
 
 @Component({
   selector: 'edit-tickets',
@@ -14,7 +16,7 @@ export class EditTicketsComponent implements OnInit {
   @Output() closeEditTickets: EventEmitter<void> = new EventEmitter<void>();
   // @Output() refreshMainModal: EventEmitter<void> = new EventEmitter<void>();
 
-  @Input() venue: Venue;
+  @Input() event: Event;
 
   selectedSector: Sector;
   selectedSectorNameSelect: string = '';
@@ -28,11 +30,13 @@ export class EditTicketsComponent implements OnInit {
   totalNumberOfTickets: number = 0;
   totalPrice: number = 0;
 
-  constructor(private sectorService: SectorService,
+  generatedTickets: Ticket[];
+
+  constructor(private ticketService: TicketService,
+              private sectorService: SectorService,
               private venueService: VenueService) { }
 
   ngOnInit(): void {
-    console.log(this.venue)
   }
 
   addNewSectorToSelected(): void {
@@ -51,7 +55,7 @@ export class EditTicketsComponent implements OnInit {
     this.sectorToAdd.name = this.newSectorName;
     this.sectorToAdd.numberOfTickets = this.newSectorNumberOfTickets;
     this.sectorToAdd.price = this.newSectorPrice;
-    this.sectorService.add(this.sectorToAdd, this.venue.id).subscribe({
+    this.sectorService.add(this.sectorToAdd, this.event.venue.id).subscribe({
       next: () => {
 
       },
@@ -64,9 +68,9 @@ export class EditTicketsComponent implements OnInit {
   }
 
   reloadVenue() {
-    this.venueService.getById(this.venue.id).subscribe({
+    this.venueService.getById(this.event.venue.id).subscribe({
       next: response => {
-        this.venue = response;
+        this.event.venue = response;
       }
     })
   }
@@ -78,7 +82,9 @@ export class EditTicketsComponent implements OnInit {
   }
 
   onSelectedSectorChanged(sectorName: string): void {
-    const selectedSector = this.venue.sectors.find(sector => sector.name === sectorName);
+    const selectedSector = this.event.venue.sectors.find(sector => sector.name === sectorName);
+    console.log("selectedSector:")
+    console.log(selectedSector);
 
     this.selectedSector = selectedSector;
   }
@@ -97,8 +103,16 @@ export class EditTicketsComponent implements OnInit {
 
   }
 
-  save() {
-
+  generateTickets() {
+    this.ticketService.generate(this.selectedSectors, this.event.id).subscribe({
+      next: response => {
+        this.generatedTickets = response;
+      },
+      complete: () => {
+        console.log("generatedTickets: ")
+        console.log(this.generatedTickets);
+      }
+    })
   }
 
   close() {
