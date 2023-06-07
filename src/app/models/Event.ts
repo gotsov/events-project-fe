@@ -1,6 +1,7 @@
 import {Venue} from "./Venue";
 import {Tag} from "./Tag";
 import {UserInfo} from "./UserInfo";
+import {Ticket} from "./Ticket";
 
 export interface Event {
   id: number,
@@ -11,4 +12,5 @@ export interface Event {
   venue: Venue;
   user: UserInfo;
   tags: Tag[];
+  tickets: Ticket[];
 }

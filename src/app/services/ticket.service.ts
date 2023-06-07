@@ -19,4 +19,15 @@ export class TicketService {
     return this.http.post(`http://localhost:8080/api/tickets/generate/event`, requestBody,
       {headers: {'Content-Type': 'application/json'}, params, withCredentials: true }) as Observable<Ticket[]>;
   }
+
+  generateFree(eventId: number, numberOfTickets: number): Observable<Ticket[]> {
+    let params = new HttpParams().set('eventId', eventId.toString());
+    params = params.append('numberOfTickets', numberOfTickets.toString());
+
+    return this.http.post(`http://localhost:8080/api/tickets/generate/event/free`, null, {
+      headers: { 'Content-Type': 'application/json' },
+      params: params,
+      withCredentials: true
+    }) as Observable<Ticket[]>;
+  }
 }

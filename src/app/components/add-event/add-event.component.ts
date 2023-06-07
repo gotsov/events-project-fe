@@ -36,7 +36,8 @@ export class AddEventComponent implements OnInit {
     description: '',
     venue: new Venue(),
     user: new UserInfo(),
-    tags: new Array<Tag>()
+    tags: [],
+    tickets: []
   };
   tagInput: string;
 

@@ -4,9 +4,9 @@
       <div class="row" id="test1">
         <div class="col">
           <div class="numbers" id="test2">
-            <p class="card-category">{{ date | dateTransformer:'dd/MM/yyyy' }}</p>
-            <p class="card-title">{{title}}<p>
-            <p class="card-pricing">15 лв. - 50 лв.<p>
+            <p class="card-category">{{ event.startDate | dateTransformer:'dd/MM/yyyy' }}</p>
+            <p class="card-title">{{event.name}}<p>
+            <p class="card-pricing">{{pricing}}<p>
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
     <div class="card-footer ">
       <hr>
       <div class="stats">
-        {{venueName}}, {{venueCity}}
+        {{event.venue.name}}, {{event.venue.city}}
       </div>
     </div>
   </div>

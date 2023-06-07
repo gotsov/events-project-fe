@@ -1,6 +1,12 @@
 <div class="container">
   <div class="event-container">
     <div class="event-box">
+      <button class="btn btn-primary btn-block" *ngIf="!isEditMode" (click)="openBuyTicketsClick($event)">Купи билети</button>
+      <button class="btn btn-primary btn-block" *ngIf="isEditMode" (click)="openEditTicketsClick($event)">Редактирай билети</button>
+    </div>
+    <buy-ticket *ngIf="showBuyTickets" (closeBuyTickets)="closeBuyTickets()" [event]="this.event"></buy-ticket>
+
+    <div class="event-box">
       <div class="event-header">
 
         <h1 *ngIf="!isEditMode">{{ event.name }}</h1>
@@ -65,12 +71,8 @@
       </div>
 
       <button class="btn btn-primary btn-block" (click)="edit()" *ngIf="!isEditMode && isAdminOrOrganizer">Редактирай</button>
+      <button class="btn btn-primary btn-block" (click)="deleteEvent()" *ngIf="isEditMode">Изтрий събитието</button>
       <button class="btn btn-primary btn-block" (click)="saveChanges()" *ngIf="isEditMode">Запази</button>
-    </div>
-
-    <div class="event-box">
-      <button class="btn btn-primary btn-block" *ngIf="!isEditMode">Купи билети</button>
-      <button class="btn btn-primary btn-block" *ngIf="isEditMode" (click)="openEditTicketsClick($event)">Редактирай билети</button>
     </div>
 
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>

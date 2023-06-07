@@ -14,7 +14,6 @@ import {Ticket} from "../../models/Ticket";
 export class EditTicketsComponent implements OnInit {
 
   @Output() closeEditTickets: EventEmitter<void> = new EventEmitter<void>();
-  // @Output() refreshMainModal: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() event: Event;
 
@@ -22,6 +21,8 @@ export class EditTicketsComponent implements OnInit {
   selectedSectorNameSelect: string = '';
   selectedSectors: Sector[] = [];
   showAddNewSector: boolean = false;
+  isEventFree: boolean;
+  isEventFreeLock: boolean = false;
 
   sectorToAdd: Sector = new Sector();
   newSectorName: string;
@@ -34,9 +35,21 @@ export class EditTicketsComponent implements OnInit {
 
   constructor(private ticketService: TicketService,
               private sectorService: SectorService,
-              private venueService: VenueService) { }
+              private venueService: VenueService) {}
 
   ngOnInit(): void {
+    if (this.event.tickets.pop().sector.name === 'free') {
+      setTimeout(() => {
+        this.isEventFree = true;
+        this.isEventFreeLock = true;
+      }, 0);
+
+    } else {
+      setTimeout(() => {
+        this.isEventFree = false;
+        this.isEventFreeLock = true;
+      }, 0);
+    }
   }
 
   addNewSectorToSelected(): void {
@@ -104,19 +117,34 @@ export class EditTicketsComponent implements OnInit {
   }
 
   generateTickets() {
-    this.ticketService.generate(this.selectedSectors, this.event.id).subscribe({
-      next: response => {
-        this.generatedTickets = response;
-      },
-      complete: () => {
-        console.log("generatedTickets: ")
-        console.log(this.generatedTickets);
-      }
-    })
+    console.log("in generateTickets()");
+    if(this.isEventFree) {
+      this.ticketService.generateFree(this.event.id, this.totalNumberOfTickets).subscribe({
+        next: response => {
+          this.generatedTickets = response;
+        },
+        complete: () => {
+          console.log("generatedFreeTickets: ")
+          console.log(this.generatedTickets);
+          this.close();
+        }
+      })
+    } else {
+      this.ticketService.generate(this.selectedSectors, this.event.id).subscribe({
+        next: response => {
+          this.generatedTickets = response;
+        },
+        complete: () => {
+          console.log("generatedTickets: ")
+          console.log(this.generatedTickets);
+          this.close();
+        }
+      })
+    }
+
   }
 
   close() {
-    // this.refreshMainModal.emit();
     this.closeEditTickets.emit();
   }
 

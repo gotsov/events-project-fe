@@ -8,7 +8,19 @@
   <div class="modal-body">
     <form (ngSubmit)="generateTickets()">
 
-      <div class="toggle-container">
+      <div class="checkbox-container">
+        <label class="checkbox-label" for="freeCheckbox">Събитието е безплатно:</label>
+        <input id="freeCheckbox" class="checkbox-input" type="checkbox" [(ngModel)]="isEventFree" [attr.disabled]="isEventFreeLock ? 'disabled' : null">
+      </div>
+
+      <div *ngIf="isEventFree">
+        <div class="form-group">
+          <label for="numberOfFreeTickets">Брой безплатни билети:</label>
+          <input id="numberOfFreeTickets" type="number" [(ngModel)]="totalNumberOfTickets" placeholder="Брой билети">
+        </div>
+      </div>
+
+      <div class="toggle-container" *ngIf="!isEventFree">
         <span class="toggle-text-left">Избери</span>
         <label class="toggle-label">
           <input type="checkbox" class="toggle-input" [(ngModel)]="showAddNewSector" (change)="filterEventsByUser()">
@@ -18,7 +30,7 @@
       </div>
 
 
-      <div *ngIf="!showAddNewSector">
+      <div *ngIf="!showAddNewSector && !isEventFree">
         <label for="sectorSelect">Сектори: </label>
         <select id="sectorSelect" [(ngModel)]="selectedSectorNameSelect" (change)="onSelectedSectorChanged($event.target.value)">
           <option *ngFor="let sector of event.venue.sectors" [value]="sector.name">{{ sector.name }}</option>
@@ -32,22 +44,25 @@
 
         <button class="add-sector-button" type="button" (click)="addNewSectorToSelected()">Добави за събитие</button>
 
-        <label>Избрани сектори:</label>
-        <ul class="selected-sectors">
-          <li *ngFor="let sector of selectedSectors" (click)="removeSector(sector)">
-            {{ sector.name }} - Билети: {{ sector.numberOfTickets }} - Цена: {{ sector.price }} лв.
-          </li>
-        </ul>
+        <div *ngIf="!isEventFree">
+          <label>Избрани сектори:</label>
+          <ul class="selected-sectors">
+            <li *ngFor="let sector of selectedSectors" (click)="removeSector(sector)">
+              {{ sector.name }} - Билети: {{ sector.numberOfTickets }} - Цена: {{ sector.price }} лв.
+            </li>
+          </ul>
+        </div>
+
       </div>
 
-      <div *ngIf="showAddNewSector">
+      <div *ngIf="showAddNewSector && !isEventFree">
         <label for="sectorSelect">Добави сектор за "{{event.venue.name}}": </label>
 
         <input type="text" [(ngModel)]="newSectorName" placeholder="Име на сектор">
         <input type="number" [(ngModel)]="newSectorNumberOfTickets" placeholder="Брой билети">
         <input type="number" [(ngModel)]="newSectorPrice" placeholder="Цена на билет">
 
-        <button class="add-sector-button" (click)="addNewSector()">Добави сектор за локацията</button>
+        <button class="add-sector-button" type="button" (click)="addNewSector()">Добави сектор за локацията</button>
       </div>
 
       <div>
@@ -57,7 +72,7 @@
 
       <div class="modal-footer">
         <div class="button-group">
-          <button class="btn btn-primary" type="submit" [disabled]="selectedSectors.length === 0">Генерирай билети</button>
+          <button class="btn btn-primary" type="submit" [disabled]="selectedSectors.length === 0 && !isEventFree">Генерирай билети</button>
           <button class="btn btn-secondary" type="button" (click)="close()">Отмени</button>
         </div>
       </div>

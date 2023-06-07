@@ -29,6 +29,7 @@ import { AddEventSectorComponent } from './components/add-event-sector/add-event
 import { EventComponent } from './components/event/event.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { EditTicketsComponent } from './components/edit-tickets/edit-tickets.component';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { EditTicketsComponent } from './components/edit-tickets/edit-tickets.com
     AddEventSectorComponent,
     EventComponent,
     EditEventComponent,
-    EditTicketsComponent
+    EditTicketsComponent,
+    BuyTicketComponent
   ],
   imports: [
     BrowserAnimationsModule,

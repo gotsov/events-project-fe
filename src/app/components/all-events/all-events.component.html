@@ -42,8 +42,7 @@
 
 <div class="event-container">
   <div *ngFor="let event of filteredEvents">
-    <event-card [id]="event.id" [title]="event.name" [date]="event.startDate" [venueName]="event.venue.name"
-                [venueCity]="event.venue.city" (click)="redirectToEvent(event.id)"></event-card>
+    <event-card [event]="event" (click)="redirectToEvent(event.id)"></event-card>
   </div>
 </div>
 

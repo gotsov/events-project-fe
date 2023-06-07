@@ -3,7 +3,6 @@ import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {response} from "express";
 
 @Component({
   selector: 'all-events',

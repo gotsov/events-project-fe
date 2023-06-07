@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
 import {Venue} from "../../models/Venue";
@@ -8,6 +8,7 @@ import {Tag} from "../../models/Tag";
 import {Sector} from "../../models/Sector";
 import {VenueService} from "../../services/venue.service";
 import {AuthService} from "../../services/auth.service";
+import {validateAndFlattenComponentImports} from "@angular/compiler-cli/src/ngtsc/annotations/component/src/util";
 
 @Component({
   selector: 'event',
@@ -24,7 +25,8 @@ export class EventComponent implements OnInit {
     description: '',
     venue: new Venue(),
     user: new UserInfo(),
-    tags: new Array<Tag>()
+    tags: [],
+    tickets: []
   };
 
   selectedVenue: Venue = {
@@ -44,20 +46,21 @@ export class EventComponent implements OnInit {
   isVenueSelected: boolean = false;
   showAddVenue: boolean = false;
   showEditTickets: boolean = false;
+  showBuyTickets: boolean = false;
   isAdminOrOrganizer: boolean = false;
   tagInput: string;
 
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
               private venueService: VenueService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.eventId = parseInt(params.get('id'));
 
       this.loadEvent();
-      this.loadSectors();
       this.getUserRole();
     });
   }
@@ -71,14 +74,21 @@ export class EventComponent implements OnInit {
     })
   }
 
-  loadSectors() {
-
-  }
-
   edit() {
     this.isEditMode = true;
     this.loadUserVenues();
     this.selectedVenueValue = this.event.venue.name;
+  }
+
+  deleteEvent() {
+    this.eventService.delete(this.event.id).subscribe({
+      next: response => {
+        console.log(response);
+      },
+      complete: () => {
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   loadUserVenues() {
@@ -138,6 +148,10 @@ export class EventComponent implements OnInit {
     this.showEditTickets = false;
   }
 
+  closeBuyTickets(){
+    this.showBuyTickets = false;
+  }
+
   onAddVenueRefresh() {
     this.loadUserVenues();
   }
@@ -148,6 +162,10 @@ export class EventComponent implements OnInit {
 
   openEditTicketsClick(event: MouseEvent) {
     this.showEditTickets = true;
+  }
+
+  openBuyTicketsClick(event: MouseEvent) {
+    this.showBuyTickets = true;
   }
 
   getUserRole() {

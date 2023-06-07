@@ -40,4 +40,8 @@ export class EventService {
     return this.http.put('http://localhost:8080/api/events', requestBody,
       {headers: {'Content-Type': 'application/json'}, withCredentials: true}) as Observable<Event>;
   }
+
+  delete(id: number): Observable<string> {
+    return this.http.delete(`http://localhost:8080/api/events/${id}`, {withCredentials: true, responseType: 'text' as 'json'}) as Observable<string>;
+  }
 }
