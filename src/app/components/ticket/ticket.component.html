@@ -1,10 +1,9 @@
 <p>Събитие: {{ ticket.event.name }}</p>
-<p>Дата: {{ ticket.event.startDate }}</p>
+<p>Дата: {{ ticket.event.startDate | date: 'dd.MM.yyyy hh:mm' }}</p>
 <p>Сектор: {{ ticket.sector.name }}</p>
 <p>Цена: {{ticket.sector.price}}</p>
 
 <button (click)="showQRCodePopup()">Show QR Code</button>
 
-<p>test</p>
-<p>test</p>
+<qr-code-modal (closeQrCodeModal)="hideQrCodeModal()" [qrCodeImage]="qrCodeImage" *ngIf="showQrModal"></qr-code-modal>
 

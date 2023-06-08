@@ -57,11 +57,6 @@ export class AddEventComponent implements OnInit {
     this.showAddVenue = true;
   }
 
-  openSectorClick(event: MouseEvent) {
-    console.log("in openSectorClick")
-    this.showSectorPopup = true;
-  }
-
   closeAddVenue() {
     this.showAddVenue = false;
   }
@@ -72,10 +67,6 @@ export class AddEventComponent implements OnInit {
 
   onAddVenueRefresh() {
     this.loadUserVenues();
-  }
-
-  onSectorRefresh() {
-
   }
 
   onSubmit() {

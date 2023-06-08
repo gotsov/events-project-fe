@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TicketFullInfo} from "../../models/TicketFullInfo";
 import {TicketService} from "../../services/ticket.service";
-import {QrPopupComponent} from "../qr-popup/qr-popup.component";
-import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'ticket',
@@ -14,9 +12,9 @@ export class TicketComponent implements OnInit {
   @Input() ticket : TicketFullInfo;
 
   qrCodeImage: string = '';
+  showQrModal = false;
 
-  constructor(private ticketService: TicketService,
-              private dialog: MatDialog) { }
+  constructor(private ticketService: TicketService) { }
 
   ngOnInit(): void {
     this.generateQRCode();
@@ -36,13 +34,11 @@ export class TicketComponent implements OnInit {
   }
 
   showQRCodePopup() {
-    const dialogRef = this.dialog.open(QrPopupComponent, {
-      data: { qrCodeImage: this.qrCodeImage },
-      width: '400px'
-    });
+    this.showQrModal = true;
+  }
 
-    dialogRef.afterClosed().subscribe(() => {
-      // Handle any actions after the popup is closed, if needed
-    });
+  hideQrCodeModal() {
+    this.showQrModal = false;
+
   }
 }

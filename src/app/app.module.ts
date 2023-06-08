@@ -35,8 +35,7 @@ import { MyInformationComponent } from './components/my-information/my-informati
 import { MyEventsComponent } from './components/my-events/my-events.component';
 import { MyTicketsComponent } from './components/my-tickets/my-tickets.component';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { QrPopupComponent } from './components/qr-popup/qr-popup.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import { QrCodeModalComponent } from './components/qr-code-modal/qr-code-modal.component';
 
 
 @NgModule({
@@ -62,7 +61,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MyEventsComponent,
     MyTicketsComponent,
     TicketComponent,
-    QrPopupComponent
+    QrCodeModalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -77,8 +76,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    NgbModule,
-    MatDialogModule
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
