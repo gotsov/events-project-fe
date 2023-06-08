@@ -1,0 +1,9 @@
+<div>
+  <h3>Моите събития</h3>
+  <div class="scrollable-list">
+    <div *ngFor="let event of myEvents">
+      <p>{{ event.name }}</p>
+      <p>{{ event.venue }}</p>
+    </div>
+  </div>
+</div>

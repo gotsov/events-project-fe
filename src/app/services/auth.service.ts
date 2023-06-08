@@ -11,9 +11,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   loggedUser: UserInfo = {
+    id: 0,
     firstName: '',
     lastName: '',
     email: '',
+    role: ''
   };
 
   private userChangedSubject: Subject<any> = new Subject<any>();

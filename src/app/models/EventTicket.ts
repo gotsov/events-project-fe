@@ -3,7 +3,7 @@ import {Tag} from "./Tag";
 import {UserInfo} from "./UserInfo";
 import {Ticket} from "./Ticket";
 
-export interface Event {
+export interface EventTicket {
   id: number,
   name: string;
   startDate: Date;
@@ -12,5 +12,4 @@ export interface Event {
   venue: Venue;
   user: UserInfo;
   tags: Tag[];
-  tickets: Ticket[];
 }

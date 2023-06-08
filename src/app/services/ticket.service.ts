@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Sector} from "../models/Sector";
 import {Observable} from "rxjs";
 import {Ticket} from "../models/Ticket";
+import {TicketFullInfo} from "../models/TicketFullInfo";
+import {Venue} from "../models/Venue";
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,17 @@ export class TicketService {
       params: params,
       withCredentials: true
     }) as Observable<Ticket[]>;
+  }
+
+  getCurrentUserTickets(): Observable<TicketFullInfo[]> {
+    return this.http.get(`http://localhost:8080/api/tickets/my-tickets`, {withCredentials: true}) as Observable<TicketFullInfo[]>;
+  }
+
+  generateTicketQRCode(ticketId: string): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/api/tickets/${ticketId}/qrcode`,
+      { withCredentials: true,
+        headers: {'Content-Type': 'application/json' },
+        responseType: 'blob' as 'json'
+      }) as Observable<Blob>;
   }
 }

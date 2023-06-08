@@ -14,4 +14,8 @@ export class LoginService {
   login(formData: FormData): Observable<any> {
     return this.http.post('http://localhost:8080/login', formData, {withCredentials: true});
   }
+
+  logout(): Observable<any> {
+    return this.http.post('http://localhost:8080/logout', {}, { withCredentials: true, responseType: 'text' });
+  }
 }

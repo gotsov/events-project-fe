@@ -5,10 +5,8 @@ import {Event} from "../../models/Event";
 import {Venue} from "../../models/Venue";
 import {UserInfo} from "../../models/UserInfo";
 import {Tag} from "../../models/Tag";
-import {Sector} from "../../models/Sector";
 import {VenueService} from "../../services/venue.service";
 import {AuthService} from "../../services/auth.service";
-import {validateAndFlattenComponentImports} from "@angular/compiler-cli/src/ngtsc/annotations/component/src/util";
 
 @Component({
   selector: 'event',

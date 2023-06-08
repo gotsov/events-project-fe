@@ -22,12 +22,14 @@ export class NavbarComponent implements OnInit {
   private toggleButton;
   private sidebarVisible: boolean;
 
-  private loggedInSubscription;
+  private welcomeText = '';
 
   loggedUser: UserInfo = {
+    id: 0,
     firstName: '',
     lastName: '',
     email: '',
+    role: ''
   };
   isUserLogged: boolean;
 
@@ -39,7 +41,8 @@ export class NavbarComponent implements OnInit {
               private renderer: Renderer2,
               private element: ElementRef,
               private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private loginService: LoginService) {
     this.location = location;
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -47,6 +50,7 @@ export class NavbarComponent implements OnInit {
     this.subscription = this.authService.userChanged$.subscribe((user) => {
       this.loggedUser = user;
       this.isUserLogged = true;
+      this.welcomeText = "Здравейте, " + this.loggedUser.firstName + " " + this.loggedUser.lastName;
     });
   }
 
@@ -122,10 +126,40 @@ export class NavbarComponent implements OnInit {
   }
 
   goToProfile() {
-    this.router.navigate(['/login']);
+    this.authService.getCurrentLoggedUser().subscribe({
+      next: response => {
+        this.loggedUser = response;
+      },
+      error: err => {
+        this.router.navigate(['/login']);
+      },
+      complete: () => {
+        this.redirectToMyAccount(this.loggedUser.id)
+      }
+    })
+  }
+
+  logout() {
+    this.loginService.logout().subscribe({
+      next: () => {
+        console.log('Logout successful');
+      },
+      error: err => {
+        console.log("Logout failed with: ");
+        console.log(err);
+      },
+      complete: () => {
+        this.welcomeText = '';
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   navigateHome() {
     this.router.navigate(['/home']);
+  }
+
+  redirectToMyAccount(userId: number) {
+    this.router.navigate(['/my-account', userId]);
   }
 }

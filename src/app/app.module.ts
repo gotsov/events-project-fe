@@ -30,6 +30,13 @@ import { EventComponent } from './components/event/event.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { EditTicketsComponent } from './components/edit-tickets/edit-tickets.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { MyInformationComponent } from './components/my-information/my-information.component';
+import { MyEventsComponent } from './components/my-events/my-events.component';
+import { MyTicketsComponent } from './components/my-tickets/my-tickets.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { QrPopupComponent } from './components/qr-popup/qr-popup.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -49,7 +56,13 @@ import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component
     EventComponent,
     EditEventComponent,
     EditTicketsComponent,
-    BuyTicketComponent
+    BuyTicketComponent,
+    MyAccountComponent,
+    MyInformationComponent,
+    MyEventsComponent,
+    MyTicketsComponent,
+    TicketComponent,
+    QrPopupComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -64,7 +77,8 @@ import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
