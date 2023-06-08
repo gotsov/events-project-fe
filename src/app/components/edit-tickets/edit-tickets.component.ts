@@ -38,7 +38,9 @@ export class EditTicketsComponent implements OnInit {
               private venueService: VenueService) {}
 
   ngOnInit(): void {
-    if (this.event.tickets.pop().sector.name === 'free') {
+    if (this.event.tickets.length === 0) {
+
+    } else if (this.event.tickets.pop().sector.name === 'free') {
       setTimeout(() => {
         this.isEventFree = true;
         this.isEventFreeLock = true;

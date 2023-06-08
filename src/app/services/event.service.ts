@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Event} from "../models/Event";
-import {Tag} from "../models/Tag";
+import {SectorWithAvailableTickets} from "../models/SectorWithAvailableTickets";
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +43,9 @@ export class EventService {
 
   delete(id: number): Observable<string> {
     return this.http.delete(`http://localhost:8080/api/events/${id}`, {withCredentials: true, responseType: 'text' as 'json'}) as Observable<string>;
+  }
+
+  getEventSectors(id: number): Observable<SectorWithAvailableTickets[]> {
+    return this.http.get(`http://localhost:8080/api/events/sectors/event/${id}`, {withCredentials: true}) as Observable<SectorWithAvailableTickets[]>;
   }
 }

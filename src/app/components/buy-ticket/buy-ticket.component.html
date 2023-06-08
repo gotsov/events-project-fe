@@ -1,1 +1,30 @@
-<p>buy-ticket works!</p>
+<div class="buy-ticket-container">
+  <label for="sectorSelect">Избери сектор:</label>
+  <select id="sectorSelect" [(ngModel)]="selectedSector" (change)="onSectorChange(selectedSector)">
+    <option *ngFor="let sector of eventSectors" [ngValue]="sector">{{ sector.name }}</option>
+  </select>
+
+  <div *ngIf="selectedSector">
+    <label for="numberOfTickets">Брой билети:</label>
+    <select id="numberOfTickets" [(ngModel)]="numberOfTickets">
+      <option *ngFor="let quantity of ticketQuantities" [ngValue]="quantity">{{ quantity }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedSector" class="right-align">
+    <p class="price-label">Цена: {{ selectedSector.price * numberOfTickets }}</p>
+    <button (click)="selectTickets()" [disabled]="!selectedSector || numberOfTickets === 0" class="small-button add-button">Добави</button>
+  </div>
+
+  <h4>Избрани билети:</h4>
+  <ul>
+    <li *ngFor="let ticket of selection; let i = index">
+      Сектор: {{ ticket.sector.name }} | Количество: {{ ticket.quantity }} | Обща цена: {{ ticket.price }}
+      <span (click)="removeTicket(i)" class="remove-button">X</span>
+    </li>
+  </ul>
+
+  <div class="center-align">
+    <button (click)="buyTickets()" [disabled]="selection.length === 0" class="small-button">Купи</button>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+.buy-ticket-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.buy-ticket-container h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.buy-ticket-container label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.buy-ticket-container select,
+.buy-ticket-container input[type="number"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.buy-ticket-container p {
+  margin-top: 10px;
+}
+
+.buy-ticket-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buy-ticket-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.buy-ticket-container h4 {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.buy-ticket-container ul {
+  padding-left: 20px;
+}
+
+.buy-ticket-container li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.buy-ticket-container .remove-button {
+  color: red;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.small-button {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.right-align {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.center-align {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.price-label {
+  flex: 1;
+}
+
+.add-button {
+  margin-left: 10px;
+}
+
+.center-align {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

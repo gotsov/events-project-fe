@@ -1,7 +1,7 @@
 <div class="container">
   <div class="event-container">
     <div class="event-box">
-      <button class="btn btn-primary btn-block" *ngIf="!isEditMode" (click)="openBuyTicketsClick($event)">Купи билети</button>
+      <button class="btn btn-primary btn-block" *ngIf="!isEditMode" (click)="openBuyTicketsClick($event)" [disabled]="!buyTicketsAvtive">{{buyTicketText}}</button>
       <button class="btn btn-primary btn-block" *ngIf="isEditMode" (click)="openEditTicketsClick($event)">Редактирай билети</button>
     </div>
     <buy-ticket *ngIf="showBuyTickets" (closeBuyTickets)="closeBuyTickets()" [event]="this.event"></buy-ticket>

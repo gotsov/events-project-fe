@@ -49,6 +49,8 @@ export class EventComponent implements OnInit {
   showBuyTickets: boolean = false;
   isAdminOrOrganizer: boolean = false;
   tagInput: string;
+  buyTicketText: string;
+  buyTicketsAvtive: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
@@ -70,8 +72,24 @@ export class EventComponent implements OnInit {
       next: response => {
         this.event = response;
         this.selectedVenue = response.venue;
+      },
+      complete: () => {
+        this.setBuyTicketTextAndStatus();
       }
     })
+  }
+
+  private setBuyTicketTextAndStatus() {
+    if (this.event.tickets.length === 0) {
+      this.buyTicketText = 'Няма билети за това събитие';
+      this.buyTicketsAvtive = false;
+    } else if (this.event.tickets.pop().sector.name === 'free') {
+      this.buyTicketText = 'Вземи безплатен билет';
+      this.buyTicketsAvtive = true;
+    } else {
+      this.buyTicketText = 'Купи билет';
+      this.buyTicketsAvtive = true;
+    }
   }
 
   edit() {
@@ -165,7 +183,11 @@ export class EventComponent implements OnInit {
   }
 
   openBuyTicketsClick(event: MouseEvent) {
-    this.showBuyTickets = true;
+    if (this.showBuyTickets) {
+      this.closeBuyTickets();
+    } else {
+      this.showBuyTickets = true;
+    }
   }
 
   getUserRole() {

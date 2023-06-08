@@ -30,4 +30,17 @@ export class TicketService {
       withCredentials: true
     }) as Observable<Ticket[]>;
   }
+
+
+  buy(eventId: number, sectorId: number, numberOfTickets: number): Observable<Ticket[]> {
+    let params = new HttpParams().set('eventId', eventId.toString());
+    params = params.append('sectorId', sectorId.toString());
+    params = params.append('numberOfTickets', numberOfTickets.toString());
+
+    return this.http.post(`http://localhost:8080/api/tickets/buy`, null,{
+      headers: {'Content-Type': 'application/json'},
+      params: params,
+      withCredentials: true
+    }) as Observable<Ticket[]>;
+  }
 }
