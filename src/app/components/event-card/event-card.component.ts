@@ -41,8 +41,6 @@ export class EventCardComponent implements OnInit {
       }
     }
 
-    this.pricing = this.minPricing + " лв. - " + this.maxPricing + " лв";
+    this.pricing = this.minPricing + " лв. - " + this.maxPricing + " лв.";
   }
 }
-
-//{{minPricing}} лв. - {{maxPricing}} лв.

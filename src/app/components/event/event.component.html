@@ -71,8 +71,14 @@
       </div>
 
       <button class="btn btn-primary btn-block" (click)="edit()" *ngIf="!isEditMode && isAdminOrOrganizer">Редактирай</button>
-      <button class="btn btn-primary btn-block" (click)="deleteEvent()" *ngIf="isEditMode">Изтрий събитието</button>
-      <button class="btn btn-primary btn-block" (click)="saveChanges()" *ngIf="isEditMode">Запази</button>
+      <div class="button-container">
+        <button class="btn btn-delete" (click)="deleteEvent()" *ngIf="isEditMode">
+          Изтрий събитието
+        </button>
+        <button class="btn btn-save" (click)="saveChanges()" *ngIf="isEditMode">
+          Запази
+        </button>
+      </div>
     </div>
 
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>

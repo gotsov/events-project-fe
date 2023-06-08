@@ -1,9 +1,13 @@
 <div>
   <h3>Моите събития</h3>
-  <div class="scrollable-list">
-    <div *ngFor="let event of myEvents">
-      <p>{{ event.name }}</p>
-      <p>{{ event.venue }}</p>
-    </div>
+
+  <div class="event-list">
+    <ng-container *ngFor="let event of myEvents; let last = last">
+      <div class="event-item" (click)="redirectToEventPage(event.id)">
+        <h4>{{ event.name }}</h4>
+        <p>{{ event.venue.name }}</p>
+      </div>
+      <hr *ngIf="!last">
+    </ng-container>
   </div>
 </div>

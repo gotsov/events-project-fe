@@ -1,5 +1,5 @@
 .buy-ticket-container {
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -85,6 +85,7 @@
 }
 
 .price-label {
+  font-size: 20px;
   flex: 1;
 }
 
@@ -96,4 +97,8 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+li {
+  font-size: 16px;
 }

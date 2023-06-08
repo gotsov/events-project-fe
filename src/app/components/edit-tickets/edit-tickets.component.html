@@ -31,7 +31,7 @@
 
 
       <div *ngIf="!showAddNewSector && !isEventFree">
-        <label for="sectorSelect">Сектори: </label>
+        <label for="sectorSelect">Сектори [{{event.venue.name}}]:</label>
         <select id="sectorSelect" [(ngModel)]="selectedSectorNameSelect" (change)="onSelectedSectorChanged($event.target.value)">
           <option *ngFor="let sector of event.venue.sectors" [value]="sector.name">{{ sector.name }}</option>
         </select>
@@ -56,7 +56,7 @@
       </div>
 
       <div *ngIf="showAddNewSector && !isEventFree">
-        <label for="sectorSelect">Добави сектор за "{{event.venue.name}}": </label>
+        <label for="sectorSelect">Добави сектор за [{{event.venue.name}}]: </label>
 
         <input type="text" [(ngModel)]="newSectorName" placeholder="Име на сектор">
         <input type="number" [(ngModel)]="newSectorNumberOfTickets" placeholder="Брой билети">

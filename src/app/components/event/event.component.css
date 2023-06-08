@@ -89,3 +89,23 @@ textarea {
   height: 100px;
   width: 100%;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.btn-delete {
+  background-color: red;
+  color: white;
+}
+
+.btn-save {
+  background-color: green;
+  color: white;
+}

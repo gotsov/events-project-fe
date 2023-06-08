@@ -12,15 +12,15 @@
   </div>
 
   <div *ngIf="selectedSector" class="right-align">
-    <p class="price-label">Цена: {{ selectedSector.price * numberOfTickets }}</p>
+    <p class="price-label">Обща цена: {{ selectedSector.price * numberOfTickets }} лв.</p>
     <button (click)="selectTickets()" [disabled]="!selectedSector || numberOfTickets === 0" class="small-button add-button">Добави</button>
   </div>
 
   <h4>Избрани билети:</h4>
   <ul>
     <li *ngFor="let ticket of selection; let i = index">
-      Сектор: {{ ticket.sector.name }} | Количество: {{ ticket.quantity }} | Обща цена: {{ ticket.price }}
-      <span (click)="removeTicket(i)" class="remove-button">X</span>
+      Сектор: {{ ticket.sector.name }} | Количество: {{ ticket.quantity }} | Обща цена: {{ ticket.price }} лв.
+      <i class="nc-icon nc-simple-remove remove-button" (click)="removeTicket(i)"></i>
     </li>
   </ul>
 

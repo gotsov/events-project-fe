@@ -92,6 +92,7 @@ export class EventComponent implements OnInit {
 
   edit() {
     this.isEditMode = true;
+    this.showBuyTickets = false;
     this.loadUserVenues();
     this.selectedVenueValue = this.event.venue.name;
   }
@@ -152,6 +153,7 @@ export class EventComponent implements OnInit {
       },
       complete: () => {
         this.isEditMode = false;
+        this.loadEvent()
       }
     });
   }

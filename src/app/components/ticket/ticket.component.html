@@ -1,9 +1,14 @@
-<p>Събитие: {{ ticket.event.name }}</p>
-<p>Дата: {{ ticket.event.startDate | date: 'dd.MM.yyyy hh:mm' }}</p>
-<p>Сектор: {{ ticket.sector.name }}</p>
-<p>Цена: {{ticket.sector.price}}</p>
+<div class="ticket-box">
+  <div class="ticket-info">
+    <p>Събитие: {{ ticket.event.name }}</p>
+    <p>Дата: {{ ticket.event.startDate | date: 'dd.MM.yyyy hh:mm' }}</p>
+    <p>Сектор: {{ ticket.sector.name }}</p>
+    <p class="ticket-price">Цена: {{ ticket.sector.price }} лв.</p>
+  </div>
+  <button class="ticket-button" (click)="showQRCodePopup()">QR код</button>
+</div>
 
-<button (click)="showQRCodePopup()">Show QR Code</button>
-
-<qr-code-modal (closeQrCodeModal)="hideQrCodeModal()" [qrCodeImage]="qrCodeImage" *ngIf="showQrModal"></qr-code-modal>
-
+<qr-code-modal (closeQrCodeModal)="hideQrCodeModal()" [qrCodeImage]="qrCodeImage" *ngIf="showQrModal">
+  <i class="close-icon" (click)="hideQrCodeModal()">X</i>
+  <img class="qr-code-image" [src]="qrCodeImage" alt="QR Code" />
+</qr-code-modal>

@@ -1,4 +1,32 @@
-.scrollable-list {
-  max-height: 200px; /* Adjust the maximum height as needed */
+.event-list {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+
+  max-height: 500px;
   overflow-y: auto;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.event-item {
+  margin-bottom: 5px;
+}
+
+.event-item:last-child {
+  margin-bottom: 0;
+}
+
+.event-item h4,
+.event-item p {
+  margin: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 5px 0;
 }

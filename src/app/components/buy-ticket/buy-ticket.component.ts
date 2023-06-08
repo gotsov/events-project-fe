@@ -34,6 +34,7 @@ export class BuyTicketComponent implements OnInit {
   }
 
   populateTicketQuantities() {
+    console.log("populateTicketQuantities:" + this.selectedSector?.numberOfAvailableTickets);
     const maxQuantity = Math.min(this.selectedSector?.numberOfAvailableTickets || 0, 10);
     this.ticketQuantities = Array.from({ length: maxQuantity }, (_, index) => index + 1);
   }
@@ -61,18 +62,23 @@ export class BuyTicketComponent implements OnInit {
         this.eventSectors = response;
       },
       complete: () => {
+        this.removeSoldOutSectors();
         this.populateTicketQuantities();
         this.calculateMaxNumberOfTickets();
+        console.log(this.eventSectors);
       }
     })
   }
 
-  calculateTotalPrice() {
-    if (this.selectedSector) {
-      this.totalPrice = this.selectedSector.price * this.numberOfTickets;
-    } else {
-      this.totalPrice = 0;
+  removeSoldOutSectors() {
+    let sectorsToRemove: SectorWithAvailableTickets[] = [];
+    for (let eventSector of this.eventSectors) {
+      if (eventSector.numberOfAvailableTickets === 0) {
+        sectorsToRemove.push(eventSector);
+      }
     }
+
+    this.eventSectors = this.eventSectors.filter(obj => !sectorsToRemove.includes(obj));
   }
 
   selectTickets() {

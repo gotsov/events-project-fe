@@ -1,12 +1,13 @@
 <div class="container">
-  <div class="card-container">
+  <div class="card-container" [ngClass]="{'expanded-card': !isAdminOrOrganizer}">
     <my-information></my-information>
   </div>
-  <div class="card-container">
+
+  <div class="card-container" *ngIf="isAdminOrOrganizer">
     <my-events></my-events>
   </div>
-  <div class="card-container">
+
+  <div class="card-container" [ngClass]="{'expanded-card': !isAdminOrOrganizer}">
     <my-tickets></my-tickets>
   </div>
 </div>
-
