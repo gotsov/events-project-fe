@@ -27,4 +27,15 @@
   <div class="center-align">
     <button (click)="buyTickets()" [disabled]="selection.length === 0" class="small-button">Купи</button>
   </div>
+
+  <div class="popup-container" [class.active]="showPopup">
+    <div class="popup-content">
+      <h3>Confirmation</h3>
+      <p>Потвърждавате ли покупката?</p>
+      <div class="popup-buttons">
+        <button class="popup-button cancel-button" (click)="cancelPurchase()">Отмени</button>
+        <button class="popup-button confirm-button" (click)="confirmPurchase()">Да</button>
+      </div>
+    </div>
+  </div>
 </div>

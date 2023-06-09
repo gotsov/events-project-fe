@@ -19,9 +19,9 @@ export class BuyTicketComponent implements OnInit {
 
   selectedSector: SectorWithAvailableTickets;
   numberOfTickets: number = 0;
-  totalPrice: number = 0;
   eventSectors: SectorWithAvailableTickets[] = [];
   ticketQuantities: number[];
+  showPopup: boolean = false;
 
   selection: any[] = [];
 
@@ -99,6 +99,15 @@ export class BuyTicketComponent implements OnInit {
   }
 
   buyTickets() {
+    // Show the confirmation popup
+    this.showPopup = true;
+  }
+
+  cancelPurchase() {
+    this.showPopup = false;
+  }
+
+  confirmPurchase() {
     for (let selectionElement of this.selection) {
       console.log(selectionElement.sector.id + " " + selectionElement.quantity);
       this.ticketService.buy(this.event.id, selectionElement.sector.id, selectionElement.quantity).subscribe({
@@ -108,7 +117,7 @@ export class BuyTicketComponent implements OnInit {
         complete: () => {
           this.selectedSector = null;
           this.loadEventSectors();
-          console.log("COMPLETE")
+          console.log("COMPLETE");
         },
         error: err => {
           console.log(err);
@@ -116,7 +125,9 @@ export class BuyTicketComponent implements OnInit {
       });
     }
 
+    this.showPopup = false;
     this.closeBuyTickets.emit();
-    console.log("AFTER FOR")
+    console.log("AFTER FOR");
   }
+
 }

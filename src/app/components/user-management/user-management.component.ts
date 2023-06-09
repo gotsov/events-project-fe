@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {UserInfo} from "../../models/UserInfo";
-import {response} from "express";
 
 @Component({
   selector: 'user-management',
@@ -50,5 +49,9 @@ export class UserManagementComponent implements OnInit {
         this.loadUsers();
       }
     });
+  }
+
+  toggleShowPendingOnly(checked: boolean) {
+    this.showPendingOnly = checked;
   }
 }

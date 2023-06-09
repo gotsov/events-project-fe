@@ -36,6 +36,7 @@ import { MyTicketsComponent } from './components/my-tickets/my-tickets.component
 import { TicketComponent } from './components/ticket/ticket.component';
 import { QrCodeModalComponent } from './components/qr-code-modal/qr-code-modal.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { FilterUsersPipe } from './pipes/filter-users.pipe';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
     MyTicketsComponent,
     TicketComponent,
     QrCodeModalComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    FilterUsersPipe
   ],
   imports: [
     BrowserAnimationsModule,

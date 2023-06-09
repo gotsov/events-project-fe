@@ -1,12 +1,13 @@
-<h3>Админски панел, заявки за организатор</h3>
+<h3>Администраторски панел</h3>
 <div class="user-management-container">
-  <label>
+  <label class="checkbox-container">
     <input type="checkbox" [(ngModel)]="showPendingOnly">
-    Show PENDING
+    <span class="checkmark"></span>
+    <p>Заявки за организатор</p>
   </label>
 
   <ul class="user-list">
-    <li *ngFor="let user of users" class="user-item">
+    <li *ngFor="let user of users | filterUsers: showPendingOnly" class="user-item">
       <div class="user-info">
         <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
         <div class="user-email">{{ user.email }}</div>
