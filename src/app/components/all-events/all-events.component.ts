@@ -142,4 +142,32 @@ export class AllEventsComponent implements OnInit {
       this.loadEvents();
     }
   }
+
+  sortEventsByUpcoming() {
+    const currentDate = new Date();
+    this.filteredEvents = this.filteredEvents.filter(event => new Date(event.startDate) >= currentDate);
+  }
+
+  isSortAscending: boolean = true;
+  sortByDate: boolean = false;
+
+  toggleSortByDate() {
+    if (this.sortByDate) {
+      this.isSortAscending = !this.isSortAscending;
+    } else {
+      this.isSortAscending = true;
+      this.sortByDate = true;
+    }
+    this.sortEvents();
+  }
+
+  sortEvents() {
+    if (this.sortByDate) {
+      if (this.isSortAscending) {
+        this.filteredEvents.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+      } else {
+        this.filteredEvents.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+      }
+    }
+  }
 }

@@ -11,16 +11,25 @@
       </div>
     </div>
 
-    <div class="dropdown" #dropdown id="sort">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="tagFilterDropdown"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown(dropdown)">
-        Сортирай
-      </button>
-      <div class="dropdown-menu" aria-labelledby="tagFilterDropdown" [ngClass]="{ 'show': isDropdownOpen }">
-        <a class="dropdown-item" href="#" (click)="toggleTagSelection(tag, $event)" *ngFor="let tag of availableTags">
-          {{ tag }}
-          <i class="nc-icon nc-check-2" *ngIf="isTagSelected(tag)"></i>
-        </a>
+    <div class="container-filters">
+      <div class="dropdown sort-container" id="sort" #dropdown >
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="tagFilterDropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown(dropdown)">
+          Тагове
+        </button>
+        <div class="dropdown-menu" aria-labelledby="tagFilterDropdown" [ngClass]="{ 'show': isDropdownOpen }">
+          <a class="dropdown-item" href="#" (click)="toggleTagSelection(tag, $event)" *ngFor="let tag of availableTags">
+            {{ tag }}
+            <i class="nc-icon nc-check-2" *ngIf="isTagSelected(tag)"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="sort-container" id="sort2">
+        <button class="btn btn-secondary sort-button" (click)="toggleSortByDate()">
+          {{ isSortAscending ? 'Най-стари' : 'Най-нови' }}
+        </button>
+        <button class="btn btn-secondary sort-button" (click)="sortEventsByUpcoming()">Предстоящи</button>
       </div>
     </div>
 

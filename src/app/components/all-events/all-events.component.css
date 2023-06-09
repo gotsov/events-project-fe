@@ -21,11 +21,6 @@
   margin-bottom: 10px;
 }
 
-#sort {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
 #show-my-events-text {
   margin-right: 10px;
 }
@@ -88,4 +83,34 @@
   font-size: 12px;
   color: #333;
   margin-right: 5px;
+}
+
+.sort-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.container-filters {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+#sort {
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+#sort2 {
+  flex: 1;
+  display: flex;
+}
+
+.sort-button {
+  flex: 1;
+  margin-right: 5px;
+  width: 150px; /* Adjust the width value as needed */
 }
