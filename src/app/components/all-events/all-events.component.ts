@@ -20,7 +20,10 @@ export class AllEventsComponent implements OnInit {
   availableTags: string[] = [];
   selectedTags: string[] = [];
   showOnlyMyEvents: boolean = false;
-
+  isDropdownOpen: boolean = false;
+  isSortAscending: boolean = true;
+  sortByDate: boolean = false;
+  isUpcoming: boolean = false;
 
   openExtension() {
     console.log("openExtension() in all-events")
@@ -94,8 +97,6 @@ export class AllEventsComponent implements OnInit {
     })
   }
 
-  isDropdownOpen: boolean = false;
-
   toggleDropdown(dropdown: any): void {
     this.isDropdownOpen = !this.isDropdownOpen;
     dropdown.classList.toggle('show');
@@ -115,7 +116,6 @@ export class AllEventsComponent implements OnInit {
 
   filterEventsByTags(): void {
     if (this.selectedTags.length === 0) {
-      // No tags selected, show all events
       this.filteredEvents = [...this.events];
     } else {
       this.filteredEvents = this.events.filter(event =>
@@ -144,12 +144,16 @@ export class AllEventsComponent implements OnInit {
   }
 
   sortEventsByUpcoming() {
-    const currentDate = new Date();
-    this.filteredEvents = this.filteredEvents.filter(event => new Date(event.startDate) >= currentDate);
-  }
+    if (this.isUpcoming) {
+      this.isUpcoming = !this.isUpcoming;
+      const currentDate = new Date();
+      this.filteredEvents = this.filteredEvents.filter(event => new Date(event.startDate) >= currentDate);
+    } else {
+      this.isUpcoming = true;
+      this.filteredEvents = this.events;
+    }
 
-  isSortAscending: boolean = true;
-  sortByDate: boolean = false;
+  }
 
   toggleSortByDate() {
     if (this.sortByDate) {

@@ -33,14 +33,13 @@ export class RegisterComponent implements OnInit {
     if (this.user.password == this.confirmPassword) {
 
       if (this.isOrganizer) {
-        this.user.role = "ORGANIZER";
+        this.user.role = "PENDING";
       } else {
         this.user.role = "REGULAR";
       }
 
       this.registerService.register(this.user);
       this.login();
-      // this.cleanInput();
     }
   }
 

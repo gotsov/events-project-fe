@@ -11,3 +11,7 @@
     <my-tickets></my-tickets>
   </div>
 </div>
+
+<div class="card-container user-management-container" *ngIf="isAdminOrOrganizer">
+  <user-management></user-management>
+</div>

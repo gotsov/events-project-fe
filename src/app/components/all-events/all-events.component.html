@@ -29,7 +29,9 @@
         <button class="btn btn-secondary sort-button" (click)="toggleSortByDate()">
           {{ isSortAscending ? 'Най-стари' : 'Най-нови' }}
         </button>
-        <button class="btn btn-secondary sort-button" (click)="sortEventsByUpcoming()">Предстоящи</button>
+        <button class="btn btn-secondary sort-button" (click)="sortEventsByUpcoming()">
+          {{ isUpcoming ? 'Предстоящи' : 'Всички' }}
+        </button>
       </div>
     </div>
 

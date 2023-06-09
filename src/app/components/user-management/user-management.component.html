@@ -1,0 +1,26 @@
+<h3>Админски панел, заявки за организатор</h3>
+<div class="user-management-container">
+  <label>
+    <input type="checkbox" [(ngModel)]="showPendingOnly">
+    Show PENDING
+  </label>
+
+  <ul class="user-list">
+    <li *ngFor="let user of users" class="user-item">
+      <div class="user-info">
+        <div class="user-name">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="user-email">{{ user.email }}</div>
+        <div class="user-role">{{ user.role }}</div>
+      </div>
+      <div class="user-actions" *ngIf="user.role === 'PENDING'">
+        <button class="action-button" (click)="acceptUser(user, 'ACCEPT')">Приеми</button>
+        <button class="action-button deny-button" (click)="acceptUser(user, 'DENY')">Откажи</button>
+      </div>
+    </li>
+  </ul>
+
+  <p>_____________________________________________________________________________________________________________________________________________________</p>
+</div>
+
+
+

@@ -35,6 +35,7 @@ import { MyEventsComponent } from './components/my-events/my-events.component';
 import { MyTicketsComponent } from './components/my-tickets/my-tickets.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { QrCodeModalComponent } from './components/qr-code-modal/qr-code-modal.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { QrCodeModalComponent } from './components/qr-code-modal/qr-code-modal.c
     MyEventsComponent,
     MyTicketsComponent,
     TicketComponent,
-    QrCodeModalComponent
+    QrCodeModalComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserAnimationsModule,
