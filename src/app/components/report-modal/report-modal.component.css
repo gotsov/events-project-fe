@@ -1,0 +1,38 @@
+.report-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.report-popup h4 {
+  margin-top: 0;
+}
+
+.report-popup textarea {
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.report-popup .button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.report-popup .close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.report-popup .close-icon i {
+  cursor: pointer;
+}

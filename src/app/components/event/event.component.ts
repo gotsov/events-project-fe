@@ -49,6 +49,7 @@ export class EventComponent implements OnInit {
   tagInput: string;
   buyTicketText: string;
   buyTicketsActive: boolean = false;
+  showReportUser: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
@@ -210,5 +211,13 @@ export class EventComponent implements OnInit {
         console.log(err)
       },
     })
+  }
+
+  openReportUser() {
+    this.showReportUser = true;
+  }
+
+  closeReportUser() {
+    this.showReportUser = false;
   }
 }

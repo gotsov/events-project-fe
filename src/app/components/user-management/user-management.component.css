@@ -119,3 +119,17 @@
   width: 170px;
   background-color: orange;
 }
+
+.action-button.view-reports-button {
+  width: 170px;
+  background-color: #F44336;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+}
+
+.nc-icon {
+  margin-right: 5px;
+}

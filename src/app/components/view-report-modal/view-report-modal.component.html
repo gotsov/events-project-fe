@@ -1,0 +1,15 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2>Репорти срещу [{{reportedUser.firstName}} {{reportedUser.lastName}}]</h2>
+    <ul>
+      <li *ngFor="let report of reports">
+        <div class="report-info">
+          <div class="reported-user">{{report.reportingUser.firstName}} {{report.reportingUser.lastName}}</div>
+          <div class="report-date">{{ report.date | date }}</div>
+        </div>
+        <div class="report-comment">{{ report.comment }}</div>
+      </li>
+    </ul>
+    <button class="close-button" (click)="closeModal()">Затвори</button>
+  </div>
+</div>

@@ -11,9 +11,13 @@ export class UserManagementComponent implements OnInit {
 
   users: UserInfo[] = [];
   showPendingOnly: boolean = false;
+  showViewReport: boolean = false;
+  selectedUser: UserInfo;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    console.log("ngOnInit IN user-management")
     this.loadUsers();
   }
 
@@ -60,5 +64,15 @@ export class UserManagementComponent implements OnInit {
         this.loadUsers();
       }
     });
+  }
+
+  openViewReports(user: UserInfo) {
+    console.log("Clicked on user with ID:", user.id);
+    this.selectedUser = user;
+    this.showViewReport = true;
+  }
+
+  closeViewReport() {
+    this.showViewReport = false;
   }
 }

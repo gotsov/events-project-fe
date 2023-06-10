@@ -15,7 +15,8 @@ export class AuthService {
     firstName: '',
     lastName: '',
     email: '',
-    role: ''
+    role: '',
+    isReported: false
   };
 
   private userChangedSubject: Subject<any> = new Subject<any>();

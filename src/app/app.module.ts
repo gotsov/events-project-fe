@@ -37,6 +37,8 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { QrCodeModalComponent } from './components/qr-code-modal/qr-code-modal.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { FilterUsersPipe } from './pipes/filter-users.pipe';
+import { ReportModalComponent } from './components/report-modal/report-modal.component';
+import { ViewReportModalComponent } from './components/view-report-modal/view-report-modal.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { FilterUsersPipe } from './pipes/filter-users.pipe';
     TicketComponent,
     QrCodeModalComponent,
     UserManagementComponent,
-    FilterUsersPipe
+    FilterUsersPipe,
+    ReportModalComponent,
+    ViewReportModalComponent
   ],
   imports: [
     BrowserAnimationsModule,

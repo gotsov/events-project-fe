@@ -108,3 +108,15 @@ textarea {
   background-color: green;
   color: white;
 }
+
+.report-icon {
+  font-size: 22px;
+  color: red;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.report-icon:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}

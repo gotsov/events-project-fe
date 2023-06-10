@@ -34,7 +34,8 @@
         <div>
           <p>
             <i class="nc-icon nc-single-02"></i>
-            Организатор: {{event.user.firstName}} {{event.user.lastName}}
+            Организатор: {{ event.user.firstName }} {{ event.user.lastName }}
+            <i class="nc-icon nc-paper report-icon" (click)="openReportUser()" title="Репорт"></i>
           </p>
         </div>
       </div>
@@ -83,5 +84,6 @@
 
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>
     <edit-tickets *ngIf="showEditTickets" (closeEditTickets)="closeEditTickets()" [event]="this.event" ></edit-tickets>
+    <report-modal *ngIf="showReportUser" (closeReport)="closeReportUser()" [reportedUser]="this.event.user"></report-modal>
   </div>
 </div>

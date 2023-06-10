@@ -4,4 +4,5 @@ export class UserInfo {
   lastName: string;
   email: string;
   role: string;
+  isReported: boolean;
 }

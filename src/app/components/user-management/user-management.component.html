@@ -17,6 +17,14 @@
         <button class="action-button" (click)="acceptUser(user, 'ACCEPT')">Приеми</button>
         <button class="action-button deny-button" (click)="acceptUser(user, 'DENY')">Откажи</button>
       </div>
+
+      <div class="user-actions" *ngIf="user.isReported">
+        <button class="action-button view-reports-button" (click)="openViewReports(user)">
+          <i class="nc-icon nc-paper"></i>
+          Виж репорти
+        </button>
+        <view-report-modal *ngIf="showViewReport && selectedUser === user" (closeViewReport)="closeViewReport()" [reportedUser]="user"></view-report-modal>
+      </div>
       <div class="user-actions" *ngIf="user.role === 'ORGANIZER'">
         <button class="action-button remove-rights-button" (click)="removeRights(user)">Премахни права</button>
       </div>
@@ -24,7 +32,6 @@
   </ul>
 
   <p>_____________________________________________________________________________________________________________________________________________________</p>
+
+
 </div>
-
-
-

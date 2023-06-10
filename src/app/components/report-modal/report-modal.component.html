@@ -1,0 +1,13 @@
+<div class="report-popup">
+  <h4>Репорт срещу [{{reportedUser.firstName}} {{reportedUser.lastName}}]</h4>
+
+  <div class="close-icon">
+    <i class="nc-icon nc-simple-remove" (click)="close()"></i>
+  </div>
+
+  <textarea [(ngModel)]="reportComment" placeholder="Коментар към репорта..."></textarea>
+  <div class="button-container">
+    <button class="btn btn-primary" (click)="sendReport()">Изпрати</button>
+    <button class="btn btn-secondary" (click)="close()">Отказ</button>
+  </div>
+</div>
