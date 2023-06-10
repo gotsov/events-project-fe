@@ -114,3 +114,8 @@
   margin: 0;
   line-height: 16px;
 }
+
+.action-button.remove-rights-button {
+  width: 170px;
+  background-color: orange;
+}

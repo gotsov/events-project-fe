@@ -13,6 +13,7 @@ export class MyAccountComponent implements OnInit {
   userId: number;
   user: UserInfo;
   isAdminOrOrganizer: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -31,6 +32,7 @@ export class MyAccountComponent implements OnInit {
       next: response => {
         this.user = response;
         this.isAdminOrOrganizer = response.role === 'ADMIN' || response.role === 'ORGANIZER';
+        this.isAdmin = response.role === 'ADMIN';
       },
       error: err => {
         console.log(err)

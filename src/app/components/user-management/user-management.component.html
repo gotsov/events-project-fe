@@ -17,6 +17,9 @@
         <button class="action-button" (click)="acceptUser(user, 'ACCEPT')">Приеми</button>
         <button class="action-button deny-button" (click)="acceptUser(user, 'DENY')">Откажи</button>
       </div>
+      <div class="user-actions" *ngIf="user.role === 'ORGANIZER'">
+        <button class="action-button remove-rights-button" (click)="removeRights(user)">Премахни права</button>
+      </div>
     </li>
   </ul>
 

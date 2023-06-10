@@ -1,8 +1,10 @@
-<div>
-  <h3>Моята информация</h3>
+<h3>Моята информация</h3>
+
+<div class="user-info-container">
   <p>Име: {{ user.firstName }}</p>
   <p>Фамилия: {{ user.lastName }}</p>
-  <p>Поща: {{ user.email }}</p>
+  <p>Имейл: {{ user.email }}</p>
   <p>Права: {{ userRoleTranslate }}</p>
-</div>
 
+  <button class="action-button" [disabled]="user.role != 'REGULAR'" (click)="requestOrganizerRights()">{{requestOrganizerButtonText}}</button>
+</div>

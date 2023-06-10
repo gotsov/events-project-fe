@@ -19,4 +19,13 @@ export class UserService {
     const params = new HttpParams().set('decision', decision);
     return this.http.get(`http://localhost:8080/api/users/accept-user/${userId}`, {params, withCredentials: true}) as Observable<UserInfo>;
   }
+
+  demoteUser(userId: number) {
+    return this.http.get(`http://localhost:8080/api/users/demote-user/${userId}`, { withCredentials: true}) as Observable<UserInfo>;
+  }
+
+  requestOrganizer() {
+    return this.http.get(`http://localhost:8080/api/users/request/organizer`, { withCredentials: true}) as Observable<UserInfo>;
+  }
+
 }

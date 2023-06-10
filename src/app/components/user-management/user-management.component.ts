@@ -51,7 +51,14 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  toggleShowPendingOnly(checked: boolean) {
-    this.showPendingOnly = checked;
+  removeRights(user: UserInfo) {
+    this.userService.demoteUser(user.id).subscribe({
+      next: response => {
+        console.log(response);
+      },
+      complete: () => {
+        this.loadUsers();
+      }
+    });
   }
 }
