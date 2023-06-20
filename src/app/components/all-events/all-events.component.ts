@@ -43,7 +43,6 @@ export class AllEventsComponent implements OnInit {
   loadEvents() {
     this.eventService.getAll().subscribe({
       next: events => {
-        console.log(events)
         this.events = events;
       },
       complete: () => {

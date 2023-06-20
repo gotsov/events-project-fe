@@ -1,6 +1,7 @@
 <div class="ticket-box">
   <div class="ticket-info">
     <p>Събитие: {{ ticket.event.name }}</p>
+    <p>Локация: {{ ticket.event.venue.name }}, {{ ticket.event.venue.city }}</p>
     <p>Дата: {{ ticket.event.startDate | date: 'dd.MM.yyyy hh:mm' }}</p>
     <p>Сектор: {{ ticket.sector.name }}</p>
     <p class="ticket-price">Цена: {{ ticket.sector.price }} лв.</p>

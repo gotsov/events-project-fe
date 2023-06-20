@@ -5,10 +5,9 @@
 }
 
 .event-box {
-  flex-basis: 25%; /* Adjust the value to control the width of each event box */
-  max-height: 200px; /* Adjust the value to limit the maximum height of each event box */
+  flex-basis: 25%;
+  max-height: 200px;
   overflow: hidden;
-  /* Add your desired styles for the event box */
 }
 
 .container {
@@ -112,5 +111,5 @@
 .sort-button {
   flex: 1;
   margin-right: 5px;
-  width: 150px; /* Adjust the width value as needed */
+  width: 150px;
 }
