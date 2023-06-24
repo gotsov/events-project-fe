@@ -21,7 +21,9 @@ export class EventCardComponent implements OnInit {
   }
 
   setPricing() {
-    if (this.event.tickets.pop().sector.name === 'free') {
+    if (this.event.tickets.pop() == null) {
+      this.pricing = 'Няма налични билети';
+    } else if (this.event.tickets.pop().sector.name === 'free') {
       this.pricing = 'Безплатно събитие';
     } else {
       this.setMinMaxPricing();
@@ -29,15 +31,17 @@ export class EventCardComponent implements OnInit {
   }
 
   setMinMaxPricing() {
-    this.minPricing = this.event.tickets.pop().sector.price;
-    for (let ticket of this.event.tickets) {
+    if (this.event.tickets.pop() != null) {
+      this.minPricing = this.event.tickets.pop().sector.price;
+      for (let ticket of this.event.tickets) {
 
-      if (ticket.sector.price < this.minPricing) {
-        this.minPricing = ticket.sector.price;
-      }
+        if (ticket.sector.price < this.minPricing) {
+          this.minPricing = ticket.sector.price;
+        }
 
-      if (ticket.sector.price > this.maxPricing) {
-        this.maxPricing = ticket.sector.price;
+        if (ticket.sector.price > this.maxPricing) {
+          this.maxPricing = ticket.sector.price;
+        }
       }
     }
 

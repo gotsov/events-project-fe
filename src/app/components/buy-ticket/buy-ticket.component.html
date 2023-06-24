@@ -4,9 +4,9 @@
     <option *ngFor="let sector of eventSectors" [ngValue]="sector">{{ sector.name }}</option>
   </select>
 
-  <div *ngIf="selectedSector">
+  <div>
     <label for="numberOfTickets">Брой билети:</label>
-    <select id="numberOfTickets" [(ngModel)]="numberOfTickets">
+    <select id="numberOfTickets" [(ngModel)]="numberOfTickets" [disabled]="disableNumberSelection">
       <option *ngFor="let quantity of ticketQuantities" [ngValue]="quantity">{{ quantity }}</option>
     </select>
   </div>
@@ -35,6 +35,15 @@
       <div class="popup-buttons">
         <button class="popup-button cancel-button" (click)="cancelPurchase()">Отмени</button>
         <button class="popup-button confirm-button" (click)="confirmPurchase()">Потвърждавам</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-container" [class.active]="showSuccess">
+    <div class="popup-content">
+      <h3>{{ successText }}</h3>
+      <div class="popup-buttons">
+        <button class="popup-button confirm-button" (click)="closeSuccess()">Добре</button>
       </div>
     </div>
   </div>

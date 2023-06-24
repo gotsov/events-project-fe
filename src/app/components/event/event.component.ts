@@ -204,7 +204,6 @@ export class EventComponent implements OnInit {
     console.log("getUserRole in all-events")
     this.authService.isUserEventOrganizer(this.eventId).subscribe({
       next: response => {
-        console.log("response = " + response)
         this.isAdminOrOrganizer = response;
       },
       error: err => {

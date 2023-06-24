@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
-import {UserInfo} from "../models/UserInfo";
-import {EventEmitter} from "protractor";
 
 @Injectable({
   providedIn: 'root'

@@ -122,23 +122,15 @@ export class EditTicketsComponent implements OnInit {
     console.log("in generateTickets()");
     if(this.isEventFree) {
       this.ticketService.generateFree(this.event.id, this.totalNumberOfTickets).subscribe({
-        next: response => {
-          this.generatedTickets = response;
-        },
         complete: () => {
-          console.log("generatedFreeTickets: ")
-          console.log(this.generatedTickets);
+          console.log("Generated " + this.totalNumberOfTickets +  "free tickets")
           this.close();
         }
       })
     } else {
       this.ticketService.generate(this.selectedSectors, this.event.id).subscribe({
-        next: response => {
-          this.generatedTickets = response;
-        },
         complete: () => {
-          console.log("generatedTickets: ")
-          console.log(this.generatedTickets);
+          console.log("Generated " + this.totalNumberOfTickets +  " tickets")
           this.close();
         }
       })

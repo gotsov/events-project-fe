@@ -22,6 +22,9 @@ export class BuyTicketComponent implements OnInit {
   eventSectors: SectorWithAvailableTickets[] = [];
   ticketQuantities: number[];
   showPopup: boolean = false;
+  showSuccess: boolean = false;
+  successText: string = '';
+  disableNumberSelection: boolean = true;
 
   selection: any[] = [];
 
@@ -51,6 +54,7 @@ export class BuyTicketComponent implements OnInit {
   }
 
   onSectorChange(sector: SectorWithAvailableTickets) {
+    this.disableNumberSelection = false;
     this.selectedSector = sector;
     this.populateTicketQuantities();
     this.calculateMaxNumberOfTickets();
@@ -82,6 +86,7 @@ export class BuyTicketComponent implements OnInit {
   }
 
   selectTickets() {
+    this.disableNumberSelection = true;
     const selectedTicket = {
       sector: this.selectedSector,
       quantity: this.numberOfTickets,
@@ -99,7 +104,6 @@ export class BuyTicketComponent implements OnInit {
   }
 
   buyTickets() {
-    // Show the confirmation popup
     this.showPopup = true;
   }
 
@@ -107,27 +111,35 @@ export class BuyTicketComponent implements OnInit {
     this.showPopup = false;
   }
 
+  closeSuccess() {
+    this.showSuccess = false;
+  }
+
   confirmPurchase() {
     for (let selectionElement of this.selection) {
-      console.log(selectionElement.sector.id + " " + selectionElement.quantity);
       this.ticketService.buy(this.event.id, selectionElement.sector.id, selectionElement.quantity).subscribe({
         next: response => {
           console.log(response);
         },
         complete: () => {
+          this.successText = 'Успешно закупихте билети';
+          this.showSuccess = true;
           this.selectedSector = null;
           this.loadEventSectors();
-          console.log("COMPLETE");
+          console.log('this.showSuccess' + this.showSuccess)
         },
         error: err => {
+          this.successText = 'Грешка при закупуването на билети! Опитайте отново.';
+          this.showSuccess = true;
           console.log(err);
         }
       });
     }
 
     this.showPopup = false;
-    this.closeBuyTickets.emit();
-    console.log("AFTER FOR");
+    this.selection = [];
+    this.disableNumberSelection = true;
+    //this.closeBuyTickets.emit();
   }
 
 }

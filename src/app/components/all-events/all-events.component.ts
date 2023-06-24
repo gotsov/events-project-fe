@@ -57,7 +57,6 @@ export class AllEventsComponent implements OnInit {
   loadAllTags() {
     this.eventService.getAllTags().subscribe({
       next: response => {
-        console.log("response = " + response)
         this.availableTags = response;
       },
       error: (error: any) => {
