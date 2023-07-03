@@ -5,7 +5,7 @@
       <p id="show-my-events-text">Моите събития</p>
       <div class="toggle-container">
         <label class="toggle-label">
-          <input type="checkbox" class="toggle-input" [(ngModel)]="showOnlyMyEvents" (change)="filterEventsByUser()">
+          <input type="checkbox" class="toggle-input" [checked]="showOnlyMyEvents" (change)="filterEventsByUser()">
           <span class="toggle-slider"></span>
         </label>
       </div>
@@ -37,7 +37,7 @@
 
 
     <div class="input-group no-border">
-      <input type="text" value="" class="form-control" placeholder="Търси...">
+      <input type="text" [(ngModel)]="searchString" (input)="searchEvents()" value="" class="form-control" placeholder="Търси...">
       <div class="input-group-append">
         <div class="input-group-text">
           <i class="nc-icon nc-zoom-split"></i>
@@ -52,10 +52,21 @@
 </form>
 
 <div class="event-container">
-  <div *ngFor="let event of filteredEvents">
+  <div *ngFor="let event of getPaginatedEvents()">
     <event-card [event]="event" (click)="redirectToEvent(event.id)"></event-card>
   </div>
 </div>
+
+<div class="pagination-container">
+  <button (click)="previousPage()" [disabled]="isPreviousEnabled()" class="pagination-button">
+    <i class="pagination-button-icon"> < </i>
+  </button>
+  <button (click)="nextPage()" [disabled]="isNextEnabled()" class="pagination-button">
+    <i class="pagination-button-icon"> > </i>
+  </button>
+</div>
+
+
 
 <div class="modal-wrapper">
   <add-event *ngIf="showModal" (closeModal)="hideModal()" (refresh)="onChildRefresh()" (openExtension)="openExtension()"></add-event>

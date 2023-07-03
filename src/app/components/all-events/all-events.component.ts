@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EventService} from "../../services/event.service";
 import {Event} from "../../models/Event";
 import {Router} from "@angular/router";
@@ -13,6 +13,9 @@ export class AllEventsComponent implements OnInit {
 
   events: Event[];
   filteredEvents: Event[];
+  currentPage: number = 1;
+  itemsPerPage: number = 9;
+  totalPages: number;
 
   showModal: boolean = false;
   isAdminOrOrganizer: boolean = false;
@@ -24,6 +27,7 @@ export class AllEventsComponent implements OnInit {
   isSortAscending: boolean = true;
   sortByDate: boolean = false;
   isUpcoming: boolean = false;
+  searchString: string = '';
 
   openExtension() {
     console.log("openExtension() in all-events")
@@ -47,6 +51,12 @@ export class AllEventsComponent implements OnInit {
       },
       complete: () => {
         this.filteredEvents = this.events;
+        this.totalPages = Math.ceil(this.events.length / this.itemsPerPage);
+
+        const currentDate = new Date();
+        this.filteredEvents = this.filteredEvents.filter(event => new Date(event.startDate) >= currentDate);
+
+        this.filteredEvents.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
       },
       error: err => {
         console.log("error: " + err);
@@ -129,6 +139,7 @@ export class AllEventsComponent implements OnInit {
   }
 
   filterEventsByUser(): void {
+    this.showOnlyMyEvents = !this.showOnlyMyEvents;
     console.log("toggle = " + this.showOnlyMyEvents)
     if (this.showOnlyMyEvents) {
       this.eventService.getCurrentUserEvents().subscribe({
@@ -171,5 +182,53 @@ export class AllEventsComponent implements OnInit {
         this.filteredEvents.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
       }
     }
+  }
+
+  searchEvents() {
+    this.filteredEvents = this.events.filter(event =>
+      event.name.toLowerCase().includes(this.searchString.toLowerCase())
+    );
+  }
+
+  getPaginatedEvents(): Event[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.filteredEvents.slice(startIndex, endIndex);
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  isPreviousEnabled(): boolean {
+    console.log("isPreviousEnabled()   ")
+    console.log("this.currentPage")
+    console.log(this.currentPage)
+    if (this.currentPage === 1) {
+      console.log("IN IF")
+      return true;
+    } else if (this.filteredEvents.length <= 9) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isNextEnabled(): boolean {
+    if (this.currentPage === this.totalPages) {
+      return true;
+    } else if (this.filteredEvents.length <= 9) {
+      return true;
+    }
+
+    return false;
   }
 }

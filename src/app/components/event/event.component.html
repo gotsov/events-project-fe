@@ -82,6 +82,17 @@
       </div>
     </div>
 
+    <div class="popup-container" [class.active]="showPopup">
+      <div class="popup-content">
+        <h3>Потвърждавам промените</h3>
+        <p>Потвърждавате ли промените за събитие {{event.name}}?</p>
+        <div class="popup-buttons">
+          <button class="popup-button cancel-button" (click)="cancelChanges()">Отмени</button>
+          <button class="popup-button confirm-button" (click)="confirmChanges()">Потвърждавам</button>
+        </div>
+      </div>
+    </div>
+
     <add-event-venue *ngIf="showAddVenue" (closeAddVenue)="closeAddVenue()" (refreshMainModal)="onAddVenueRefresh()" [caller]="'edit-event'"></add-event-venue>
     <edit-tickets *ngIf="showEditTickets" (closeEditTickets)="closeEditTickets()" [event]="this.event" ></edit-tickets>
     <report-modal *ngIf="showReportUser" (closeReport)="closeReportUser()" [reportedUser]="this.event.user"></report-modal>

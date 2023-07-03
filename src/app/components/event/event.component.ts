@@ -50,6 +50,7 @@ export class EventComponent implements OnInit {
   buyTicketText: string;
   buyTicketsActive: boolean = false;
   showReportUser: boolean = false;
+  showPopup: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
@@ -82,7 +83,10 @@ export class EventComponent implements OnInit {
   private setBuyTicketTextAndStatus() {
     this.authService.getCurrentLoggedUser().subscribe({
       complete: () => {
-        if (this.event.tickets.length === 0) {
+        if (new Date(this.event.endDate) < new Date()) {
+          this.buyTicketText = 'Отминало събитие';
+          this.buyTicketsActive = false;
+        } else if (this.event.tickets.length === 0) {
           this.buyTicketText = 'Няма билети за това събитие';
           this.buyTicketsActive = false;
         } else if (this.event.tickets.pop().sector.name === 'free') {
@@ -157,15 +161,24 @@ export class EventComponent implements OnInit {
   }
 
   saveChanges() {
+    this.showPopup = true;
+  }
+
+  confirmChanges() {
     this.eventService.update(this.event).subscribe({
       next: response => {
         this.event = response;
       },
       complete: () => {
         this.isEditMode = false;
-        this.loadEvent()
+        this.loadEvent();
+        this.showPopup = false;
       }
     });
+  }
+
+  cancelChanges() {
+    this.showPopup = false;
   }
 
   closeAddVenue() {

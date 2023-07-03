@@ -4,3 +4,7 @@
   margin: 25px;
   cursor: pointer;
 }
+
+.expired-event {
+  background-color: #ffcccc;
+}

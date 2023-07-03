@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="card-footer ">
+    <div class="card-footer" [ngClass]="{ 'expired-event': isEventExpired() }">
       <hr>
       <div class="stats">
         {{event.venue.name}}, {{event.venue.city}}

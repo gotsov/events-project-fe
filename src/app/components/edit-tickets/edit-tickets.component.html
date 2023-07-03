@@ -31,7 +31,7 @@
 
 
       <div *ngIf="!showAddNewSector && !isEventFree">
-        <label for="sectorSelect">Сектори [{{event.venue.name}}]:</label>
+        <label for="sectorSelect">Сектори за [{{event.venue.name}}]:</label>
         <select id="sectorSelect" [(ngModel)]="selectedSectorNameSelect" (change)="onSelectedSectorChanged($event.target.value)">
           <option *ngFor="let sector of event.venue.sectors" [value]="sector.name">{{ sector.name }}</option>
         </select>
@@ -72,7 +72,7 @@
 
       <div class="modal-footer">
         <div class="button-group">
-          <button class="btn btn-primary" type="submit" [disabled]="selectedSectors.length === 0 && !isEventFree">Генерирай билети</button>
+          <button class="btn btn-primary" type="submit" [disabled]="selectedSectors.length === 0 && totalNumberOfTickets === 0">Генерирай билети</button>
           <button class="btn btn-secondary" type="button" (click)="close()">Отмени</button>
         </div>
       </div>

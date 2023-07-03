@@ -47,4 +47,11 @@ export class EventCardComponent implements OnInit {
 
     this.pricing = this.minPricing + " лв. - " + this.maxPricing + " лв.";
   }
+
+  isEventExpired(): boolean {
+    const endDate = new Date(this.event.endDate);
+    const currentDate = new Date();
+
+    return endDate < currentDate;
+  }
 }
